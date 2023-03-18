@@ -3,7 +3,7 @@ import { getBots, increaseBots } from '../controllers/botsController.js'
 
 const router = express.Router()
 
-router.post('/increase', increaseBots)
+router.put('/increase', increaseBots)
 
 router.get('/counter', getBots)
 
