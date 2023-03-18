@@ -1,9 +1,9 @@
 import express from 'express'
-import { getBots } from '../controllers/botsController.js'
+import { getBots, increaseBots } from '../controllers/botsController.js'
 
 const router = express.Router()
 
-router.post('/increase', getBots)
+router.post('/increase', increaseBots)
 
 router.get('/counter', getBots)
 

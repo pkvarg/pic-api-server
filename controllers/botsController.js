@@ -1,11 +1,23 @@
 // import asyncHandler from 'express-async-handler'
+let clicks = 0
 
-const getBots = (req, res) => {
-  let initialCount = 0
-  let newCount = initialCount + 1
-  initialCount = newCount
-  console.log(newCount)
-  res.json(newCount)
+// api/post/increase
+
+const increaseBots = (req, res) => {
+  clicks += 1
+  res.json(clicks)
 }
 
-export { getBots }
+// api/bots/counter
+
+const getBots = (req, res) => {
+  console.log('req', req.body)
+
+  // let initialCount = 0
+  // let newCount = initialCount + 1
+  // initialCount = newCount
+
+  res.json(clicks)
+}
+
+export { getBots, increaseBots }
