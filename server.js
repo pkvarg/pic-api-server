@@ -22,7 +22,7 @@ app.use(
 
 app.use('/api/bots', botsRouter)
 
-const PORT = 1000
+const PORT = 2000
 
 const startServer = async () => {
   connectDB()
