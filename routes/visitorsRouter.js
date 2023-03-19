@@ -10,4 +10,6 @@ router.put('/pic/increase', increaseVisitors)
 
 router.get('/pic/counter', getVisitors)
 
+router.put('/pic/agree/increase', increaseVisitors)
+
 export default router

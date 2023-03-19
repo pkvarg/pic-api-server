@@ -2,7 +2,10 @@ import mongoose from 'mongoose'
 
 const visitorsSchema = mongoose.Schema(
   {
-    visitorsCount: {
+    visitorsDeclined: {
+      type: Number,
+    },
+    visitorsAgreed: {
       type: Number,
     },
   },
