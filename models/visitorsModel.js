@@ -8,6 +8,18 @@ const visitorsSchema = mongoose.Schema(
     visitorsAgreed: {
       type: Number,
     },
+    visitorsDeclinedDvl: {
+      type: Number,
+    },
+    visitorsAgreedDvl: {
+      type: Number,
+    },
+    visitorsDeclinedIo: {
+      type: Number,
+    },
+    visitorsAgreedIo: {
+      type: Number,
+    },
   },
 
   {
