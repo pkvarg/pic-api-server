@@ -19,6 +19,7 @@ app.use(
       'https://pictusweb.sk',
       'https://kvalitnamontaz.sk',
       'https://ioana-illustrations.eu',
+      'https://ecommerce.pictusweb.sk',
     ],
   })
 )
