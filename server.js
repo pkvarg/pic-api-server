@@ -5,6 +5,7 @@ import connectDB from './config/db.js'
 import colors from 'colors'
 import botsRouter from './routes/botsRouter.js'
 import visitorsRouter from './routes/visitorsRouter.js'
+import dvlOrdersRouter from './routes/dvlOrdersRouter.js'
 
 dotenv.config()
 //connectDB()
@@ -24,8 +25,11 @@ app.use(
   })
 )
 
+app.use(express.json())
+
 app.use('/api/bots', botsRouter)
 app.use('/api/visitors', visitorsRouter)
+app.use('/api/admin', dvlOrdersRouter)
 
 const PORT = 2000
 
