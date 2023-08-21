@@ -36,4 +36,26 @@ const dvlOrdersSingle = asyncHandler(async (req, res) => {
   }
 })
 
-export { dvlOrdersCont, dvlOrdersSingle }
+const dvlOrdersSearch = asyncHandler(async (req, res) => {
+  const query = req.params.query
+  console.log('query', query)
+
+  try {
+    const results = await dvlOrders.find({
+      $or: [
+        { name: { $regex: query, $options: 'i' } }, // 'i' for case-insensitive
+        { title: { $regex: query, $options: 'i' } },
+        { address: { $regex: query, $options: 'i' } },
+        { phone: { $regex: query, $options: 'i' } },
+        { description: { $regex: query, $options: 'i' } },
+      ],
+    })
+
+    res.json(results)
+  } catch (error) {
+    console.error('Error searching in MongoDB:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
+export { dvlOrdersCont, dvlOrdersSingle, dvlOrdersSearch }
