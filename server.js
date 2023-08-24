@@ -6,6 +6,7 @@ import colors from 'colors'
 import botsRouter from './routes/botsRouter.js'
 import visitorsRouter from './routes/visitorsRouter.js'
 import dvlOrdersRouter from './routes/dvlOrdersRouter.js'
+import path from 'path'
 
 dotenv.config()
 //connectDB()
@@ -26,10 +27,14 @@ app.use(
 )
 
 app.use(express.json())
+app.use('/uploads', express.static(path.resolve('uploads')))
 
 app.use('/api/bots', botsRouter)
 app.use('/api/visitors', visitorsRouter)
 app.use('/api/admin', dvlOrdersRouter)
+app.get('/', (req, res) => {
+  res.send('Hello pic-api!')
+})
 
 const PORT = 2000
 

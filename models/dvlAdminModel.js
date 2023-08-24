@@ -18,6 +18,15 @@ const dvlOrdersSchema = mongoose.Schema(
     title: {
       type: String,
     },
+    price: {
+      type: String,
+    },
+    date: {
+      type: Date,
+    },
+    files: {
+      type: [Object],
+    },
   },
 
   {
