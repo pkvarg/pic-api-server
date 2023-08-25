@@ -1,6 +1,5 @@
 import asyncHandler from 'express-async-handler'
 import dvlOrders from '../models/dvlAdminModel.js'
-import dvlSingleFileUpload from '../models/dvlSingleFileUpload.js'
 
 const dvlOrdersCont = asyncHandler(async (req, res) => {
   console.log('hello Admin', req.method)
@@ -25,8 +24,8 @@ const dvlOrdersCont = asyncHandler(async (req, res) => {
       name,
       address,
       phone,
-      price: price !== 'undefined' ? price : '?',
-      date,
+      price: price !== 'undefined' ? price : 'null',
+      date: date !== 'undefined' ? date : null,
       description,
       files,
     }
@@ -50,6 +49,18 @@ const dvlOrdersSingle = asyncHandler(async (req, res) => {
   } else if (req.method === 'PATCH') {
     const order = await dvlOrders.findById(id)
     const { address, description, name, phone, title, date, price } = req.body
+    const files = []
+    if (req.files) {
+      req.files.forEach((element) => {
+        const file = {
+          fileName: element.originalname,
+          fileType: element.mimetype,
+          filePath: element.path,
+          fileSize: getSizeFile(element.size, 2),
+        }
+        files.push(file)
+      })
+    }
     order.address = address
     order.description = description
     order.name = name
@@ -57,10 +68,22 @@ const dvlOrdersSingle = asyncHandler(async (req, res) => {
     order.title = title
     order.date = date
     order.price = price
+    order.files = files
     const savedOrder = await order.save()
     res.status(200).json(savedOrder)
   } else if (req.method === 'DELETE') {
     const order = await dvlOrders.deleteOne({ _id: id })
+    res.status(200).json('OK')
+  }
+})
+
+const dvlFiles = asyncHandler(async (req, res) => {
+  const id = req.params.id
+  const { index } = req.body
+  if (req.method === 'PATCH') {
+    const order = await dvlOrders.findById({ _id: id })
+    order.files.splice(index, 1)
+    order.save()
     res.status(200).json('OK')
   }
 })
@@ -99,4 +122,4 @@ const getSizeFile = (bytes, decimals) => {
   )
 }
 
-export { dvlOrdersCont, dvlOrdersSingle, dvlOrdersSearch }
+export { dvlOrdersCont, dvlOrdersSingle, dvlOrdersSearch, dvlFiles }
