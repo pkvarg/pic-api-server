@@ -1,13 +1,36 @@
 import asyncHandler from 'express-async-handler'
 import dvlOrders from '../models/dvlAdminModel.js'
 import dvlSingleFileUpload from '../models/dvlSingleFileUpload.js'
-import dvlMultiFiles from '../models/dvlMultiFilesUpload.js'
 
 const dvlOrdersCont = asyncHandler(async (req, res) => {
   console.log('hello Admin', req.method)
 
   if (req.method === 'POST') {
-    const orderData = req.body
+    const { title, name, address, phone, price, date, description } = req.body
+    const files = []
+    if (req.files) {
+      req.files.forEach((element) => {
+        const file = {
+          fileName: element.originalname,
+          fileType: element.mimetype,
+          filePath: element.path,
+          fileSize: getSizeFile(element.size, 2),
+        }
+        files.push(file)
+      })
+    }
+
+    const orderData = {
+      title,
+      name,
+      address,
+      phone,
+      price: price !== 'undefined' ? price : '?',
+      date,
+      description,
+      files,
+    }
+    console.log(orderData)
 
     const order = new dvlOrders(orderData)
     await order.save()
@@ -66,44 +89,6 @@ const dvlOrdersSearch = asyncHandler(async (req, res) => {
   }
 })
 
-const fileUpload = async (req, res) => {
-  try {
-    const file = new dvlSingleFileUpload({
-      fileName: req.file.originalname,
-      fileType: req.file.mimetype,
-      filePath: req.file.path,
-      fileSize: getSizeFile(req.file.size, 2),
-    })
-    const fileUploaded = await file.save()
-    res.status(201).json({ message: 'the file upload success', fileUploaded })
-  } catch (error) {
-    return error
-  }
-}
-
-const multiFileUpload = async (req, res, next) => {
-  try {
-    const arrFile = []
-    req.files.forEach((element) => {
-      const file = {
-        fileName: element.originalname,
-        fileType: element.mimetype,
-        filePath: element.path,
-        fileSize: getSizeFile(element.size, 2),
-      }
-      arrFile.push(file)
-    })
-    const multi = new dvlMultiFiles({
-      title: req.body.title,
-      files: arrFile,
-    })
-    const multifilesUp = await multi.save()
-    res.status(201).json({ message: 'the file upload success', multifilesUp })
-  } catch (error) {
-    return next(error)
-  }
-}
-
 const getSizeFile = (bytes, decimals) => {
   if (decimals === 0) return '0 Bytes'
   const dm = decimals || 2
@@ -114,10 +99,4 @@ const getSizeFile = (bytes, decimals) => {
   )
 }
 
-export {
-  dvlOrdersCont,
-  dvlOrdersSingle,
-  dvlOrdersSearch,
-  fileUpload,
-  multiFileUpload,
-}
+export { dvlOrdersCont, dvlOrdersSingle, dvlOrdersSearch }
