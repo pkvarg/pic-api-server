@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import dvlOrders from '../models/dvlAdminModel.js'
+import fs from 'fs'
 
 const dvlOrdersCont = asyncHandler(async (req, res) => {
   console.log('hello Admin', req.method)
@@ -49,17 +50,30 @@ const dvlOrdersSingle = asyncHandler(async (req, res) => {
   } else if (req.method === 'PATCH') {
     const order = await dvlOrders.findById(id)
     const { address, description, name, phone, title, date, price } = req.body
-    const files = []
+    let files = []
     if (req.files) {
-      req.files.forEach((element) => {
-        const file = {
-          fileName: element.originalname,
-          fileType: element.mimetype,
-          filePath: element.path,
-          fileSize: getSizeFile(element.size, 2),
-        }
-        files.push(file)
-      })
+      if (order.files.length > 0) {
+        files = order.files
+        req.files.forEach((element) => {
+          const file = {
+            fileName: element.originalname,
+            fileType: element.mimetype,
+            filePath: element.path,
+            fileSize: getSizeFile(element.size, 2),
+          }
+          files.push(file)
+        })
+      } else {
+        req.files.forEach((element) => {
+          const file = {
+            fileName: element.originalname,
+            fileType: element.mimetype,
+            filePath: element.path,
+            fileSize: getSizeFile(element.size, 2),
+          }
+          files.push(file)
+        })
+      }
     }
     order.address = address
     order.description = description
@@ -112,6 +126,49 @@ const dvlOrdersSearch = asyncHandler(async (req, res) => {
   }
 })
 
+const dvlOrdersFileOnServer = asyncHandler(async (req, res) => {
+  const fileName = req.params.name
+  console.log(fileName)
+  const filePath = `./uploads/${fileName}` // Adjust the path accordingly
+
+  if (req.method === 'DELETE') {
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error(err)
+        res
+          .status(500)
+          .json({ error: 'Nemožno vymazať súbor - asi už neexistuje.' })
+      } else {
+        res.status(200).json('OK')
+      }
+    })
+  } else if (req.method === 'GET') {
+    // Check if the file exists
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).send('Súbor nenájdený')
+    }
+    const fileStream = fs.createReadStream(filePath)
+    // Handle errors during file stream creation
+    fileStream.on('error', (error) => {
+      console.error(`Error creating file stream: ${error}`)
+      res.status(500).send('Internal Server Error')
+    })
+    fileStream.pipe(res)
+    // Handle errors during response piping
+    res.on('error', (error) => {
+      console.error(`Error piping response: ${error}`)
+      res.status(500).send('Internal Server Error')
+    })
+
+    // Close the response when the file stream ends
+    fileStream.on('end', () => {
+      res.end()
+    })
+  }
+
+  // Use the fs.unlink method to delete the file
+})
+
 const getSizeFile = (bytes, decimals) => {
   if (decimals === 0) return '0 Bytes'
   const dm = decimals || 2
@@ -122,4 +179,10 @@ const getSizeFile = (bytes, decimals) => {
   )
 }
 
-export { dvlOrdersCont, dvlOrdersSingle, dvlOrdersSearch, dvlFiles }
+export {
+  dvlOrdersCont,
+  dvlOrdersSingle,
+  dvlOrdersSearch,
+  dvlFiles,
+  dvlOrdersFileOnServer,
+}
