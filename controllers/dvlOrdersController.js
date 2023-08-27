@@ -114,7 +114,6 @@ const dvlOrdersSearch = asyncHandler(async (req, res) => {
         { address: { $regex: query, $options: 'i' } },
         { phone: { $regex: query, $options: 'i' } },
         { description: { $regex: query, $options: 'i' } },
-        { date: { $regex: query, $options: 'i' } },
         { price: { $regex: query, $options: 'i' } },
       ],
     })
