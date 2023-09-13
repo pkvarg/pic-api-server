@@ -12,11 +12,17 @@ router.get('/pic/counter', getVisitors)
 
 router.put('/pic/agree/increase', increaseVisitors)
 
-router.put('/dvl/increase', increaseVisitors)
+router.put('/cesta/increase', increaseVisitors)
 
-router.get('/dvl/counter', getVisitors)
+router.get('/cesta/counter', getVisitors)
 
-router.put('/dvl/agree/increase', increaseVisitors)
+router.put('/katolicka/increase', increaseVisitors)
+
+router.get('/katolicka/counter', getVisitors)
+
+router.put('/svedkovia/increase', increaseVisitors)
+
+router.get('/svedkovia/counter', getVisitors)
 
 router.put('/io/increase', increaseVisitors)
 

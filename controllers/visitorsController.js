@@ -15,12 +15,15 @@ const increaseVisitors = asyncHandler(async (req, res) => {
   } else if (url === '/pic/agree/increase') {
     const visitorsAgreedInDb = count.visitorsAgreed
     count.visitorsAgreed = visitorsAgreedInDb + 1
-  } else if (url === '/dvl/increase') {
-    const visitorsDeclinedDvlInDb = count.visitorsDeclinedDvl
-    count.visitorsDeclinedDvl = visitorsDeclinedDvlInDb + 1
-  } else if (url === '/dvl/agree/increase') {
-    const visitorsAgreedDvlInDb = count.visitorsAgreedDvl
-    count.visitorsAgreedDvl = visitorsAgreedDvlInDb + 1
+  } else if (url === '/cesta/increase') {
+    const visitorsCestaInDb = count.visitorsCestaZivota
+    count.visitorsCestaZivota = visitorsCestaInDb + 1
+  } else if (url === '/katolicka/increase') {
+    const visitorsKatolickaInDb = count.visitorsKatolicka
+    count.visitorsKatolicka = visitorsKatolickaInDb + 1
+  } else if (url === '/svedkovia/increase') {
+    const visitorsSvedkoviaInDb = count.visitorsSvedkovia
+    count.visitorsSvedkovia = visitorsSvedkoviaInDb + 1
   } else if (url === '/io/increase') {
     const visitorsDeclinedIoInDb = count.visitorsDeclinedIo
     count.visitorsDeclinedIo = visitorsDeclinedIoInDb + 1
@@ -51,13 +54,15 @@ const getVisitors = asyncHandler(async (req, res) => {
       agreed: visitorsAgreed,
       declined: visitorsDeclined,
     })
-  } else if (url === '/dvl/counter') {
-    const visitorsDeclined = count.visitorsDeclinedDvl
-    const visitorsAgreed = count.visitorsAgreedDvl
-    res.json({
-      agreed: visitorsAgreed,
-      declined: visitorsDeclined,
-    })
+  } else if (url === '/cesta/counter') {
+    const visitorsCount = count.visitorsCestaZivota
+    res.json(visitorsCount)
+  } else if (url === '/katolicka/counter') {
+    const visitorsCount = count.visitorsKatolicka
+    res.json(visitorsCount)
+  } else if (url === '/svedkovia/counter') {
+    const visitorsCount = count.visitorsSvedkovia
+    res.json(visitorsCount)
   } else if (url === '/io/counter') {
     const visitorsDeclined = count.visitorsDeclinedIo
     const visitorsAgreed = count.visitorsAgreedIo

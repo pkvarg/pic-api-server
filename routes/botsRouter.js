@@ -7,9 +7,9 @@ router.put('/increase', increaseBots)
 
 router.get('/counter', getBots)
 
-router.put('/dvl/increase', increaseBots)
+// router.put('/dvl/increase', increaseBots)
 
-router.get('/dvl/counter', getBots)
+// router.get('/dvl/counter', getBots)
 
 router.put('/io/increase', increaseBots)
 

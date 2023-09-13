@@ -5,9 +5,9 @@ const botsSchema = mongoose.Schema(
     botsCount: {
       type: Number,
     },
-    botsCountDvl: {
-      type: Number,
-    },
+    // botsCountDvl: {
+    //   type: Number,
+    // },
     botsCountIo: {
       type: Number,
     },

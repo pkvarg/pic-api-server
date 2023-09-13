@@ -12,9 +12,6 @@ const increaseBots = asyncHandler(async (req, res) => {
   if (url === '/increase') {
     const botsInDb = count.botsCount
     count.botsCount = botsInDb + 1
-  } else if (url === '/dvl/increase') {
-    const botsInDvlDb = count.botsCountDvl
-    count.botsCountDvl = botsInDvlDb + 1
   } else if (url === '/io/increase') {
     const botsInIoDb = count.botsCountIo
     count.botsCountIo = botsInIoDb + 1
@@ -35,9 +32,6 @@ const getBots = asyncHandler(async (req, res) => {
   if (url === '/counter') {
     const bots = count.botsCount
     res.json(bots)
-  } else if (url === '/dvl/counter') {
-    const botsDvl = count.botsCountDvl
-    res.json(botsDvl)
   } else if (url === '/io/counter') {
     const botsIo = count.botsCountIo
     res.json(botsIo)
