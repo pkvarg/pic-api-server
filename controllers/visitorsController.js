@@ -24,6 +24,9 @@ const increaseVisitors = asyncHandler(async (req, res) => {
   } else if (url === '/svedkovia/increase') {
     const visitorsSvedkoviaInDb = count.visitorsSvedkovia
     count.visitorsSvedkovia = visitorsSvedkoviaInDb + 1
+  } else if (url === '/gender/increase') {
+    const visitorsGenderInDb = count.visitorsGender
+    count.visitorsGender = visitorsGenderInDb + 1
   } else if (url === '/io/increase') {
     const visitorsDeclinedIoInDb = count.visitorsDeclinedIo
     count.visitorsDeclinedIo = visitorsDeclinedIoInDb + 1
@@ -62,6 +65,9 @@ const getVisitors = asyncHandler(async (req, res) => {
     res.json(visitorsCount)
   } else if (url === '/svedkovia/counter') {
     const visitorsCount = count.visitorsSvedkovia
+    res.json(visitorsCount)
+  } else if (url === '/gender/counter') {
+    const visitorsCount = count.visitorsGender
     res.json(visitorsCount)
   } else if (url === '/io/counter') {
     const visitorsDeclined = count.visitorsDeclinedIo

@@ -24,6 +24,10 @@ router.put('/svedkovia/increase', increaseVisitors)
 
 router.get('/svedkovia/counter', getVisitors)
 
+router.put('/gender/increase', increaseVisitors)
+
+router.get('/gender/counter', getVisitors)
+
 router.put('/io/increase', increaseVisitors)
 
 router.get('/io/counter', getVisitors)

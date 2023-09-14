@@ -18,6 +18,10 @@ const visitorsSchema = mongoose.Schema(
       type: Number,
     },
 
+    visitorsGender: {
+      type: Number,
+    },
+
     visitorsDeclinedIo: {
       type: Number,
     },
