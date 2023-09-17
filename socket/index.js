@@ -30,9 +30,11 @@ io.on('connection', (socket) => {
 
   // Take userEmail
   socket.on('addUser', (userEmail) => {
-    addUser(userEmail, socket.id)
-    io.emit('getUsers', activeUsers)
-    //   //console.log('UN', username)
+    if (userEmail) {
+      addUser(userEmail, socket.id)
+      io.emit('getUsers', activeUsers)
+      console.log('added', activeUsers)
+    }
     // })
 
     // send and get message
