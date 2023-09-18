@@ -1,6 +1,9 @@
 import { Server } from 'socket.io'
+import cors from 'cors'
 
-const io = new Server(8990, {
+const PORT = 3001
+
+const io = new Server(PORT, {
   cors: {
     origin: ['http://localhost:3000', 'https://librosophia.sk'],
   },
@@ -54,3 +57,5 @@ io.on('connection', (socket) => {
     })
   })
 })
+
+//server.listen(PORT, () => console.log(`Server has started. Port ${PORT}`))
