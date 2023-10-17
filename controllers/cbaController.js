@@ -44,7 +44,7 @@ const updateSingleBlog = asyncHandler(async (req, res) => {
   if (blog) {
     blog.title = title
     blog.category = category
-    blog.media = media
+    blog.media = media || ''
     blog.text = text
 
     const savedBlog = await blog.save()
