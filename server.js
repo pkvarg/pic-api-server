@@ -6,6 +6,7 @@ import colors from 'colors'
 import botsRouter from './routes/botsRouter.js'
 import visitorsRouter from './routes/visitorsRouter.js'
 import emailRouter from './routes/emailRouter.js'
+import cbaRouter from './routes/cbaRouter.js'
 import path from 'path'
 dotenv.config()
 //connectDB()
@@ -16,6 +17,7 @@ app.use(
   cors({
     origin: [
       'http://localhost:5173',
+      'https://localhost:5173',
       'https://cba.pictusweb.sk',
       'https://pictusweb.sk',
       'https://cestazivota.sk',
@@ -34,6 +36,7 @@ app.use('/uploads', express.static(path.resolve('uploads')))
 app.use('/api/bots', botsRouter)
 app.use('/api/visitors', visitorsRouter)
 app.use('/api/email', emailRouter)
+app.use('/api/cba', cbaRouter)
 app.get('/', (req, res) => {
   res.send('Hello pic-api!')
 })
