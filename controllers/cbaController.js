@@ -74,10 +74,24 @@ const deleteSingleBlog = asyncHandler(async (req, res) => {
   }
 })
 
+// GET api/cba/blogs/category/:category
+
+const getBlogsByCategory = asyncHandler(async (req, res) => {
+  const { category } = req.params
+  const blogs = await cbaBlog.find({ category: category })
+  if (blogs) {
+    res.json(blogs)
+  } else {
+    res.status(404)
+    throw new Error(`No blogs in category ${category} were found`)
+  }
+})
+
 export {
   createBlog,
   getAllBlogs,
   getSingleBlog,
   updateSingleBlog,
   deleteSingleBlog,
+  getBlogsByCategory,
 }
