@@ -7,6 +7,7 @@ import botsRouter from './routes/botsRouter.js'
 import visitorsRouter from './routes/visitorsRouter.js'
 import emailRouter from './routes/emailRouter.js'
 import cbaRouter from './routes/cbaRouter.js'
+import mdRouter from './routes/mdRouter.js'
 import path from 'path'
 dotenv.config()
 //connectDB()
@@ -26,6 +27,7 @@ app.use(
       'https://katolickaviera.sk',
       'https://svedkovia.sk',
       'https://duhovyrod.sk',
+      'https://md.pictusweb.sk',
     ],
   })
 )
@@ -37,6 +39,7 @@ app.use('/api/bots', botsRouter)
 app.use('/api/visitors', visitorsRouter)
 app.use('/api/email', emailRouter)
 app.use('/api/cba', cbaRouter)
+app.use('/api/md', mdRouter)
 app.get('/', (req, res) => {
   res.send('Hello pic-api!')
 })
