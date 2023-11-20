@@ -48,11 +48,11 @@ const sendEmail = asyncHandler(async (req, res) => {
     urbanQuality,
     monthlyCosts,
     email,
-    minPriceWithoutRealEstateAssistance,
-    maxPriceWithoutRealEstateAssistance,
-    minPriceWithRealEstateAssistance,
-    maxPriceWithRealEstateAssistance,
+    withoutRealEstateAssistance,
+    withRealEstateAssistance,
   } = req.body
+
+  console.log('req', req.body)
 
   const skObj = {
     flatOrHouse: flatOrHouse === 'flat' ? 'Byt' : 'dom',
@@ -86,12 +86,10 @@ const sendEmail = asyncHandler(async (req, res) => {
         : urbanQuality === 'excellent'
         ? 'výborná'
         : 'slabšia',
-    email: 'pkvarg@yahoo.se',
+    email,
     monthlyCosts,
-    minPriceWithoutRealEstateAssistance: 210875,
-    maxPriceWithoutRealEstateAssistance: 221973,
-    minPriceWithRealEstateAssistance: 200833,
-    maxPriceWithRealEstateAssistance: 211402,
+    withoutRealEstateAssistance,
+    withRealEstateAssistance,
   }
 
   console.log('sk!', skObj)
@@ -135,8 +133,8 @@ const sendEmail = asyncHandler(async (req, res) => {
       <p>Klimatizácia: ${skObj.hasAirCon}</p> 
       <p>Občianska vybavenosť: ${skObj.urbanQuality}</p> 
       <p>Mesačné náklady: ${skObj.monthlyCosts} €</p> 
-      <h3>Cena bez služieb Realitnej kancelárie: ${skObj.minPriceWithoutRealEstateAssistance} € až ${skObj.maxPriceWithoutRealEstateAssistance} €</h3> 
-      <h3>Cena po odpočítaní služieb Realitnej kancelárie: ${skObj.minPriceWithRealEstateAssistance} € až ${skObj.maxPriceWithRealEstateAssistance} €</h3>
+      <h3>Cena bez služieb Realitnej kancelárie:  ${skObj.withoutRealEstateAssistance} €</h3> 
+      <h3>Cena po odpočítaní služieb Realitnej kancelárie: ${skObj.withRealEstateAssistance} €</h3>
       
       <p>S pozdravom</p> 
       <p>Moderný Maklér</p> 
