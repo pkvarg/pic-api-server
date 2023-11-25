@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "strapi": "npm run start --prefix strapi-app",
-    "nodestart": "node server",
-    "start": "concurrently \"npm run nodestart\" \"npm run strapi\"",
+    "start": "node server",
+    "ifstrapistart": "concurrently \"npm run nodestart\" \"npm run strapi\"",
     "server": "nodemon server"
   },
   "author": "Peter Varga",
