@@ -52,7 +52,7 @@ const sendEmail = asyncHandler(async (req, res) => {
     withRealEstateAssistance,
   } = req.body
 
-  console.log('req', req.body)
+  console.log('req1', req.body)
 
   const skObj = {
     flatOrHouse: flatOrHouse === 'flat' ? 'Byt' : 'dom',
@@ -92,7 +92,7 @@ const sendEmail = asyncHandler(async (req, res) => {
     withRealEstateAssistance,
   }
 
-  console.log('sk!', skObj)
+  console.log('sk!1', skObj)
 
   try {
     const userMailData = {
@@ -147,8 +147,47 @@ const sendEmail = asyncHandler(async (req, res) => {
     res.json({ status: 'Success' })
   } catch (error) {
     console.log(error)
-    res.json({ status: error })
+    //res.json({ status: error })
+    res.status(500).send(error)
   }
 })
 
-export { sendEmail }
+const contactEmail = asyncHandler(async (req, res) => {
+  const { name, email, phone, message } = req.body
+
+  console.log(name, email, phone, message)
+  try {
+    const userMailData = {
+      from: process.env.EMAIL_FROM,
+
+      to: `${email}`,
+      bcc: process.env.NODEJS_BCC,
+
+      subject: `Moderný marklér`,
+      html: `<div>
+      <p>Dobrý deň,</p>
+      <p>Ďakujeme Vám za Váš email.</p>
+      <p>Vaše meno: ${name}</p> 
+      <p>Váš email: ${email}</p>
+      <p>Váš telefón: ${phone}</p> 
+      <p>Vaša správa: ${message}</p> 
+      
+      <p>Ozveme sa Vám čoskoro</p>
+    
+      
+      <p>S pozdravom</p> 
+      <p>Moderný Maklér</p> 
+  
+       
+  
+      `,
+    }
+    transporter().sendMail(userMailData)
+    res.status(200).json({ status: 'Success' })
+  } catch (error) {
+    console.log(error)
+    res.status(500).send(error)
+  }
+})
+
+export { sendEmail, contactEmail }
