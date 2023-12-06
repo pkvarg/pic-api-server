@@ -133,8 +133,9 @@ const sendEmail = asyncHandler(async (req, res) => {
       <p>Klimatizácia: ${skObj.hasAirCon}</p> 
       <p>Občianska vybavenosť: ${skObj.urbanQuality}</p> 
       <p>Mesačné náklady: ${skObj.monthlyCosts} €</p> 
-      <h3>Cena bez služieb Realitnej kancelárie:  ${skObj.withoutRealEstateAssistance} €</h3> 
-      <h3>Cena po odpočítaní služieb Realitnej kancelárie: ${skObj.withRealEstateAssistance} €</h3>
+      
+      <h3>Odhadovaná cena Vašej
+      nehnuteľnosti: ${skObj.withRealEstateAssistance} €</h3>
       
       <p>S pozdravom</p> 
       <p>Moderný Maklér</p> 
