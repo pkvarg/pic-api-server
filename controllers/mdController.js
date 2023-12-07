@@ -10,8 +10,8 @@ const transporter = () => {
     port: 465,
     secure: true, // use TLS
     auth: {
-      user: process.env.NODEJS_USERNAME,
-      pass: process.env.NODEJS_PASSWORD,
+      user: process.env.MD_USERNAME,
+      pass: process.env.MD_PASSWORD,
     },
   })
 }
@@ -96,15 +96,16 @@ const sendEmail = asyncHandler(async (req, res) => {
 
   try {
     const userMailData = {
-      from: process.env.EMAIL_FROM,
+      from: `Michal Dovala  ${process.env.MD_EMAIL_FROM}`,
 
       to: `${email}`,
-      bcc: process.env.NODEJS_BCC,
+      bcc: process.env.MD_BCC,
+      replyTo: process.env.MD_ADMIN_EMAIL,
 
       subject: `Moderný marklér`,
       html: `<div>
       <p>Dobrý deň,</p>
-      <p>Ďakujeme Vám za Váš email.</p>
+     
       <p>Váš email: ${email}</p>
       <p>Typ nehnuteľnosti: ${skObj.flatOrHouse}</p> 
       <p>Mesto: ${skObj.city}</p> 
@@ -159,10 +160,11 @@ const contactEmail = asyncHandler(async (req, res) => {
   console.log(name, email, phone, message)
   try {
     const userMailData = {
-      from: process.env.EMAIL_FROM,
+      from: `Michal Dovala  ${process.env.MD_EMAIL_FROM}`,
 
       to: `${email}`,
-      bcc: process.env.NODEJS_BCC,
+      bcc: process.env.MD_BCC,
+      replyTo: process.env.MD_ADMIN_EMAIL,
 
       subject: `Moderný marklér`,
       html: `<div>

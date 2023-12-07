@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import nodemailer from 'nodemailer'
 
-// PUT api/email/contact
+// PUT api/email/cba-contact
 
 const transporter = () => {
   return nodemailer.createTransport({
