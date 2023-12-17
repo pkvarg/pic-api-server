@@ -10,6 +10,7 @@ const invoiceData = {
   body: {
     city: __dirname + '/utils/titulok02.png',
   },
+  qrcode: __dirname + '/utils/md-qr-code.png',
   email: 'pkvarg@yahoo.se',
   flatOrHouse: 'Byt',
   city: 'Bratislava',
@@ -52,8 +53,8 @@ const niceInvoice = (invoice, path) => {
 
   header(doc, invoice)
   body(doc, invoice)
-  title(doc)
-
+  title(doc, invoice)
+  footer(doc, invoice)
   doc.end()
   doc.pipe(fs.createWriteStream(path))
 }
@@ -71,7 +72,7 @@ let body = (doc, invoice) => {
     .moveDown()
 }
 
-let title = (doc) => {
+let title = (doc, invoice) => {
   doc
     .fillColor('#0775b9')
     .fontSize(14)
@@ -92,6 +93,24 @@ let title = (doc) => {
       505
     )
 
+    .moveDown()
+}
+
+let footer = (doc, invoice) => {
+  doc.rect(0, 650, 660, 150).fill('#0775b9')
+  doc.image(invoice.qrcode, 40, 680, {
+    width: 90,
+    height: 90,
+  })
+  doc
+    .fillColor('white')
+    .fontSize(14)
+    .font('calibri')
+    .text('Michal DOVALA', 450, 670)
+    .text('realitný sprostredkovateľ', 397.5, 685)
+    .fontSize(12)
+    .text('+421 944 517 560', 452.5, 750)
+    .text('info@michaldovala.sk', 432.5, 765)
     .moveDown()
 }
 
