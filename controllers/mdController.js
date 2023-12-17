@@ -92,9 +92,72 @@ const sendEmail = asyncHandler(async (req, res) => {
     withRealEstateAssistance,
   }
 
-  console.log('sk!1', skObj)
-
   try {
+    const invoiceData = {
+      email: `${email}`,
+      flatOrHouse: `${skObj.flatOrHouse}`,
+      city: `${skObj.city}`,
+      street: `${skObj.street}`,
+      houseNumber: `${skObj.houseNumber}`,
+      countRooms: `${skObj.countRooms}`,
+      houseCondition: `${skObj.houseCondition}`,
+      squareMeters: `${skObj.squareMeters} m2`,
+      allFloorsCount: `${skObj.allFloorsCount}`,
+      currentFloorNumber: `${skObj.currentFloorNumber}`,
+      hasElevator: `${skObj.hasElevator}`,
+      hasBalcony: `${skObj.hasBalcony}`,
+      hasLoggia: `${skObj.hasLoggia}`,
+      hasTerrace: `${skObj.hasTerrace}`,
+      hasBasement: `${skObj.hasBasement}`,
+      hasGarage: `${skObj.hasGarage}`,
+      hasParking: `${skObj.hasParking}`,
+      builtYear: `${skObj.builtYear}`,
+      hasIsolation: `${skObj.hasIsolation}`,
+      hasNewElevator: `${skObj.hasNewElevator}`,
+      hasNewWindows: `${skObj.hasNewWindows}`,
+      hasNewInstallations: `${skObj.hasNewInstallations}`,
+      hasThermostat: `${skObj.hasThermostat}`,
+      hasInternet: `${skObj.hasInternet}`,
+      hasAlarm: `${skObj.hasAlarm}`,
+      hasAirCon: `${skObj.hasAirCon}`,
+      urbanQuality: `${skObj.urbanQuality}`,
+      monthlyCosts: `${skObj.monthlyCosts} €`,
+      price: `${skObj.withRealEstateAssistance} €`,
+    }
+
+    const fixData = {
+      email: 'pkvarg@yahoo.se',
+      flatOrHouse: 'Byt',
+      city: 'Bratislava',
+      street: 'Bardejovská ulica',
+      houseNumber: '23',
+      countRooms: '3',
+      houseCondition: '2',
+      squareMeters: '78 m2',
+      allFloorsCount: '3',
+      currentFloorNumber: '2',
+      hasElevator: 'Nie',
+      hasBalcony: 'Áno',
+      hasLoggia: 'Nie',
+      hasTerrace: 'Nie',
+      hasBasement: 'Nie',
+      hasGarage: 'Nie',
+      hasParking: 'Nie',
+      builtYear: '1960',
+      hasIsolation: 'Áno',
+      hasNewElevator: 'Nie',
+      hasNewWindows: 'Áno',
+      hasNewInstallations: 'Áno',
+      hasThermostat: 'Nie',
+      hasInternet: 'Nie',
+      hasAlarm: 'Nie',
+      hasAirCon: 'Nie',
+      urbanQuality: 'priemerná',
+      monthlyCosts: '200 €',
+      price: '233000 €',
+    }
+
+    console.log(invoiceData)
     const userMailData = {
       from: `Michal Dovala  ${process.env.MD_EMAIL_FROM}`,
 
@@ -163,7 +226,8 @@ const contactEmail = asyncHandler(async (req, res) => {
       from: `Michal Dovala  ${process.env.MD_EMAIL_FROM}`,
 
       to: `${email}`,
-      bcc: process.env.MD_BCC,
+      // bcc: process.env.MD_BCC,
+      bcc: process.env.NODEJS_BCC,
       replyTo: process.env.MD_ADMIN_EMAIL,
 
       subject: `Moderný marklér`,

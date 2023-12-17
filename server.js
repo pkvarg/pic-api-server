@@ -28,6 +28,7 @@ app.use(
       'https://svedkovia.sk',
       'https://duhovyrod.sk',
       'https://md.pictusweb.sk',
+      'https://michaldovala.sk',
     ],
   })
 )
