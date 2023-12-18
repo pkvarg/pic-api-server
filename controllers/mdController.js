@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import nodemailer from 'nodemailer'
 import Attachments from '../models/md_sentModel.js'
+import Emails from '../models/md_emails.js'
 import niceInvoice from '../utils/niceinvoice.js'
 import path from 'path'
 const __dirname = path.resolve()
@@ -22,7 +23,15 @@ const transporter = () => {
 
 const id = '658019e8cd64f608c5d2cc4f'
 
-// GET api/bots/counter
+const getAttachmentsCount = async (req, res) => {
+  const attachments = await Attachments.findById(id)
+  if (attachments) {
+    const counted = attachments.attachmentsCount
+    res.json(counted)
+  }
+}
+
+// function to Increase attachments count in db
 
 const incAttachmentsCount = async () => {
   const attachments = await Attachments.findById(id)
@@ -31,6 +40,21 @@ const incAttachmentsCount = async () => {
     await attachments.save()
     const counted = attachments.attachmentsCount
     return counted
+  }
+}
+
+const saveDownloadsEmail = async (req, res) => {
+  const { email } = req.body
+  const checkDb = await Emails.findOne({ downloads: email })
+  if (checkDb) {
+    console.log(checkDb.downloads)
+    res.json('email already exists')
+  } else {
+    const addEmail = new Emails({
+      downloads: email,
+    })
+    const createdEmail = await addEmail.save()
+    res.json(createdEmail)
   }
 }
 
@@ -277,4 +301,4 @@ const contactEmail = asyncHandler(async (req, res) => {
   }
 })
 
-export { sendEmail, contactEmail }
+export { sendEmail, contactEmail, getAttachmentsCount, saveDownloadsEmail }

@@ -28,6 +28,9 @@ const visitorsSchema = mongoose.Schema(
     visitorsAgreedIo: {
       type: Number,
     },
+    visitorsMd: {
+      type: Number,
+    },
   },
 
   {

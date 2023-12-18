@@ -28,6 +28,10 @@ router.put('/gender/increase', increaseVisitors)
 
 router.get('/gender/counter', getVisitors)
 
+router.get('/md/counter', getVisitors)
+
+router.put('/md/increase', increaseVisitors)
+
 router.put('/io/increase', increaseVisitors)
 
 router.get('/io/counter', getVisitors)

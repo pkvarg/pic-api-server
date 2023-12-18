@@ -5,6 +5,7 @@ const md_sentSchema = mongoose.Schema(
     attachmentsCount: {
       type: Number,
     },
+    downloads: [{ email: { type: String } }],
   },
 
   {

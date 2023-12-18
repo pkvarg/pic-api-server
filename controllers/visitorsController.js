@@ -33,6 +33,10 @@ const increaseVisitors = asyncHandler(async (req, res) => {
   } else if (url === '/io/agree/increase') {
     const visitorsAgreedIoInDb = count.visitorsAgreedIo
     count.visitorsAgreedIo = visitorsAgreedIoInDb + 1
+  } else if (url === '/md/increase') {
+    console.log('here inc', url)
+    const visitorsMdInDb = count.visitorsMd
+    count.visitorsMd = visitorsMdInDb + 1
   } else {
     console.log('unknown url')
   }
@@ -76,6 +80,10 @@ const getVisitors = asyncHandler(async (req, res) => {
       agreed: visitorsAgreed,
       declined: visitorsDeclined,
     })
+  } else if (url === '/md/counter') {
+    const visitorsCount = count.visitorsMd
+    console.log('vc here', visitorsCount)
+    res.json(visitorsCount)
   } else {
     console.log('Unknown url')
   }
