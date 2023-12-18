@@ -47,7 +47,6 @@ const saveDownloadsEmail = async (req, res) => {
   const { email } = req.body
   const checkDb = await Emails.findOne({ downloads: email })
   if (checkDb) {
-    console.log(checkDb.downloads)
     res.json('email already exists')
   } else {
     const addEmail = new Emails({
@@ -56,6 +55,11 @@ const saveDownloadsEmail = async (req, res) => {
     const createdEmail = await addEmail.save()
     res.json(createdEmail)
   }
+}
+
+const getEmails = async (req, res) => {
+  const emails = await Emails.find({})
+  res.json(emails)
 }
 
 const time = new Date()
@@ -182,7 +186,6 @@ const sendEmail = asyncHandler(async (req, res) => {
     monthlyCosts: `${skObj.monthlyCosts} €`,
     price: `${skObj.withRealEstateAssistance.toLocaleString()} €`,
   }
-  console.log('attNO', addAttachNumber)
   console.log('inv Data', invoiceData)
   let file = `${street}_${houseNumber}_00${addAttachNumber}.pdf`
 
@@ -301,4 +304,10 @@ const contactEmail = asyncHandler(async (req, res) => {
   }
 })
 
-export { sendEmail, contactEmail, getAttachmentsCount, saveDownloadsEmail }
+export {
+  sendEmail,
+  contactEmail,
+  getAttachmentsCount,
+  saveDownloadsEmail,
+  getEmails,
+}
