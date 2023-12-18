@@ -60,7 +60,14 @@ const sendEmail = asyncHandler(async (req, res) => {
     street,
     houseNumber,
     countRooms,
-    houseCondition,
+    houseCondition:
+      houseCondition === '1'
+        ? 'Novostavba'
+        : houseCondition === '2'
+        ? 'Vynikajúci'
+        : houseCondition === '3'
+        ? 'Dobrý'
+        : 'Pôvodný',
     squareMeters,
     allFloorsCount,
     currentFloorNumber,
@@ -94,6 +101,16 @@ const sendEmail = asyncHandler(async (req, res) => {
 
   try {
     const invoiceData = {
+      header: {
+        company_logo: __dirname + '/utils/titulok01.png',
+      },
+      body: {
+        city: __dirname + '/utils/titulok02.png',
+      },
+      final: {
+        picture: __dirname + '/utils/mdfinalpage.png',
+      },
+      qrcode: __dirname + '/utils/md-qr-code.png',
       email: `${email}`,
       flatOrHouse: `${skObj.flatOrHouse}`,
       city: `${skObj.city}`,
