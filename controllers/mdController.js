@@ -207,8 +207,8 @@ const sendEmail = asyncHandler(async (req, res) => {
   <p>- dokumentácia</p> 
   <p>- pôdorysy</p> 
   <p>- list vlastníctva</p> 
-  <p> -katastrálna mapa</p> 
-  <p> -iné dokumenty potrebné k posúdeniu napr. stavebné povolenie, územné rozhodnutie ...</p> 
+  <p>- katastrálna mapa</p> 
+  <p>- iné dokumenty potrebné k posúdeniu napr. stavebné povolenie, územné rozhodnutie ...</p> 
   <p>2. Analýza trhovej ceny nehnuteľnosti, prepočet ceny nehnuteľnosti a návrh aktuálnej ceny nehnuteľnosti vzhľadom na aktuálne trhové ceny.</p> 
   <p>3. Príprava nehnuteľnosti na predaj, vypracovanie profesionálnej prezentácie nehnuteľnosti za účelom ďalšieho marketingu na sociálnych sieťach, inzertných portáloch, ...</p> 
   <p>Príprava na prezentáciu obsahuje: </p> 
@@ -241,8 +241,8 @@ const sendEmail = asyncHandler(async (req, res) => {
       from: `Michal Dovala  ${process.env.MD_EMAIL_FROM}`,
 
       to: `${email}`,
-      // bcc: process.env.MD_BCC,
-      bcc: process.env.NODEJS_BCC,
+      bcc: process.env.MD_BCC,
+      // bcc: process.env.NODEJS_BCC,
       replyTo: process.env.MD_ADMIN_EMAIL,
 
       subject: `Moderný marklér`,
