@@ -3,52 +3,52 @@ import PDFDocument from 'pdfkit'
 import path from 'path'
 const __dirname = path.resolve()
 
-const invoiceData = {
-  header: {
-    company_logo: __dirname + '/utils/titulok01.png',
-  },
-  body: {
-    city: __dirname + '/utils/titulok02.png',
-  },
-  final: {
-    picture: __dirname + '/utils/mdfinalpage.png',
-  },
-  qrcode: __dirname + '/utils/md-qr-code.png',
-  email: 'pkvarg@yahoo.se',
-  flatOrHouse: 'Byt',
-  city: 'Bratislava',
-  street: 'Bardejovská ulica',
-  houseNumber: '23',
-  countRooms: '3',
-  houseCondition: '2',
-  squareMeters: '78 m2',
-  allFloorsCount: '3',
-  currentFloorNumber: '2',
-  hasElevator: 'Nie',
-  hasBalcony: 'Áno',
-  hasLoggia: 'Nie',
-  hasTerrace: 'Nie',
-  hasBasement: 'Nie',
-  hasGarage: 'Nie',
-  hasParking: 'Nie',
-  builtYear: '1960',
-  hasIsolation: 'Áno',
-  hasNewElevator: 'Nie',
-  hasNewWindows: 'Áno',
-  hasNewInstallations: 'Áno',
-  hasThermostat: 'Nie',
-  hasInternet: 'Nie',
-  hasAlarm: 'Nie',
-  hasAirCon: 'Nie',
-  urbanQuality: 'priemerná',
-  monthlyCosts: '200 €',
-  price: '233000 €',
-}
+// const invoiceData = {
+//   header: {
+//     company_logo: __dirname + '/utils/titulok01.png',
+//   },
+//   body: {
+//     city: __dirname + '/utils/titulok02.png',
+//   },
+//   final: {
+//     picture: __dirname + '/utils/mdfinalpage.png',
+//   },
+//   qrcode: __dirname + '/utils/md-qr-code.png',
+//   email: 'pkvarg@yahoo.se',
+//   flatOrHouse: 'Byt',
+//   city: 'Bratislava',
+//   street: 'Bardejovská ulica',
+//   houseNumber: '23',
+//   countRooms: '3',
+//   houseCondition: '2',
+//   squareMeters: '78 m2',
+//   allFloorsCount: '3',
+//   currentFloorNumber: '2',
+//   hasElevator: 'Nie',
+//   hasBalcony: 'Áno',
+//   hasLoggia: 'Nie',
+//   hasTerrace: 'Nie',
+//   hasBasement: 'Nie',
+//   hasGarage: 'Nie',
+//   hasParking: 'Nie',
+//   builtYear: '1960',
+//   hasIsolation: 'Áno',
+//   hasNewElevator: 'Nie',
+//   hasNewWindows: 'Áno',
+//   hasNewInstallations: 'Áno',
+//   hasThermostat: 'Nie',
+//   hasInternet: 'Nie',
+//   hasAlarm: 'Nie',
+//   hasAirCon: 'Nie',
+//   urbanQuality: 'priemerná',
+//   monthlyCosts: '200 €',
+//   price: '233000 €',
+// }
 
 // path = f.ex. orderNumber.pdf to be counted in db and ++
 
 const niceInvoice = (invoice, path) => {
-  console.log('invoice:', invoice)
+  console.log('niceinvoice:', invoice)
   let doc = new PDFDocument({ size: 'A4', margin: 40 })
 
   doc.registerFont('calibri', __dirname + '/utils/fonts/Calibri.ttf')
@@ -94,19 +94,13 @@ let title = (doc, invoice) => {
     .fontSize(14)
     .font('calibri')
     .text(
-      `${
-        invoiceData.countRooms
-      } izbový ${invoiceData.flatOrHouse.toLowerCase()}`,
+      `${invoice.countRooms} izbový ${invoice.flatOrHouse.toLowerCase()}`,
       50,
       495
     )
     .fontSize(14)
     .font('calibri-bold')
-    .text(
-      `${invoiceData.street} ${invoiceData.houseNumber}, ${invoiceData.city}`,
-      50,
-      505
-    )
+    .text(`${invoice.street} ${invoice.houseNumber}, ${invoice.city}`, 50, 505)
 
     .moveDown()
 }
@@ -197,6 +191,6 @@ let footerFinal = (doc, invoice) => {
     .moveDown()
 }
 
-niceInvoice(invoiceData, 'attachment01.pdf')
+//niceInvoice(invoiceData, 'attachment01.pdf')
 
 export default niceInvoice
