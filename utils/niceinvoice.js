@@ -3,47 +3,47 @@ import PDFDocument from 'pdfkit'
 import path from 'path'
 const __dirname = path.resolve()
 
-// const invoiceData = {
-//   header: {
-//     company_logo: __dirname + '/utils/titulok01.png',
-//   },
-//   body: {
-//     city: __dirname + '/utils/titulok02.png',
-//   },
-//   final: {
-//     picture: __dirname + '/utils/mdfinalpage.png',
-//   },
-//   qrcode: __dirname + '/utils/md-qr-code.png',
-//   email: 'pkvarg@yahoo.se',
-//   flatOrHouse: 'Byt',
-//   city: 'Bratislava',
-//   street: 'Bardejovská ulica',
-//   houseNumber: '23',
-//   countRooms: '3',
-//   houseCondition: '2',
-//   squareMeters: '78 m2',
-//   allFloorsCount: '3',
-//   currentFloorNumber: '2',
-//   hasElevator: 'Nie',
-//   hasBalcony: 'Áno',
-//   hasLoggia: 'Nie',
-//   hasTerrace: 'Nie',
-//   hasBasement: 'Nie',
-//   hasGarage: 'Nie',
-//   hasParking: 'Nie',
-//   builtYear: '1960',
-//   hasIsolation: 'Áno',
-//   hasNewElevator: 'Nie',
-//   hasNewWindows: 'Áno',
-//   hasNewInstallations: 'Áno',
-//   hasThermostat: 'Nie',
-//   hasInternet: 'Nie',
-//   hasAlarm: 'Nie',
-//   hasAirCon: 'Nie',
-//   urbanQuality: 'priemerná',
-//   monthlyCosts: '200 €',
-//   price: '233000 €',
-// }
+const invoiceData = {
+  header: {
+    company_logo: __dirname + '/utils/titulok01.png',
+  },
+  body: {
+    city: __dirname + '/utils/titulok02.png',
+  },
+  final: {
+    picture: __dirname + '/utils/mdfinalpage.jpeg',
+  },
+  qrcode: __dirname + '/utils/md-qr-code.png',
+  email: 'pkvarg@yahoo.se',
+  flatOrHouse: 'Byt',
+  city: 'Bratislava',
+  street: 'Bardejovská ulica',
+  houseNumber: '23',
+  countRooms: '3',
+  houseCondition: '2',
+  squareMeters: '78 m2',
+  allFloorsCount: '3',
+  currentFloorNumber: '2',
+  hasElevator: 'Nie',
+  hasBalcony: 'Áno',
+  hasLoggia: 'Nie',
+  hasTerrace: 'Nie',
+  hasBasement: 'Nie',
+  hasGarage: 'Nie',
+  hasParking: 'Nie',
+  builtYear: '1960',
+  hasIsolation: 'Áno',
+  hasNewElevator: 'Nie',
+  hasNewWindows: 'Áno',
+  hasNewInstallations: 'Áno',
+  hasThermostat: 'Nie',
+  hasInternet: 'Nie',
+  hasAlarm: 'Nie',
+  hasAirCon: 'Nie',
+  urbanQuality: 'priemerná',
+  monthlyCosts: '200 €',
+  price: '233000 €',
+}
 
 // path = f.ex. orderNumber.pdf to be counted in db and ++
 
@@ -75,8 +75,7 @@ let header = (doc, invoice) => {
 let body = (doc, invoice) => {
   doc
     .image(invoice.body.city, 40, 150, {
-      width: 515,
-      height: 275,
+      width: 510,
     })
     .moveDown()
 }
@@ -86,21 +85,21 @@ let title = (doc, invoice) => {
     .fillColor('#0775b9')
     .fontSize(14)
     .font('calibri')
-    .text('komplexné', 50, 440)
+    .text('komplexné', 50, 540)
     .fontSize(24)
     .font('calibri-bold')
-    .text('NACENENIE', 50, 450)
-    .text('NEHNUTEĽNOSTI', 50, 470)
+    .text('NACENENIE', 50, 550)
+    .text('NEHNUTEĽNOSTI', 50, 570)
     .fontSize(14)
     .font('calibri')
     .text(
       `${invoice.countRooms} izbový ${invoice.flatOrHouse.toLowerCase()}`,
       50,
-      495
+      595
     )
     .fontSize(14)
     .font('calibri-bold')
-    .text(`${invoice.street} ${invoice.houseNumber}, ${invoice.city}`, 50, 505)
+    .text(`${invoice.street} ${invoice.houseNumber}, ${invoice.city}`, 50, 605)
 
     .moveDown()
 }
@@ -167,30 +166,31 @@ let data = (doc, invoice) => {
     .moveDown()
 }
 let final = (doc, invoice) => {
+  doc.rect(0, 650, 660, 150).fill('#0775b9')
   doc
-    .image(invoice.header.company_logo, 490, 25, { width: 75 })
-    .image(invoice.final.picture, 15, 75, { width: 500 })
+    //.image(invoice.header.company_logo, 490, 25, { width: 75 })
+    .image(invoice.final.picture, 0, 0, { width: 595.5 })
 
     .moveDown()
 }
 let footerFinal = (doc, invoice) => {
-  doc.rect(0, 650, 660, 150).fill('#0775b9')
-  doc.image(invoice.qrcode, 40, 680, {
-    width: 90,
-    height: 90,
+  doc.rect(0, 562.5, 660, 1550).fill('#0775b9')
+  doc.image(invoice.qrcode, 32.5, 640, {
+    width: 130,
+    height: 130,
   })
   doc
     .fillColor('white')
-    .fontSize(18)
+    .fontSize(30)
     .font('calibri')
-    .text('DOHODNITE SI OSOBNÚ OBHLIADKU UŽ DNES!', 199, 687.5)
+    .text('DOHODNITE SI OSOBNÚ OBHLIADKU UŽ DNES!', 199, 677.5)
     // .text('realitný sprostredkovateľ', 397.5, 685)
     .fontSize(12)
-    .text('+421 944 517 560', 452.5, 740)
-    .text('info@michaldovala.sk', 432.5, 755)
+    // .text('+421 944 517 560', 452.5, 740)
+    // .text('info@michaldovala.sk', 432.5, 755)
     .moveDown()
 }
 
-//niceInvoice(invoiceData, 'attachment01.pdf')
+niceInvoice(invoiceData, 'newAttachment01.pdf')
 
 export default niceInvoice

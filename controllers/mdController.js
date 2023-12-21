@@ -153,7 +153,7 @@ const sendEmail = asyncHandler(async (req, res) => {
       city: __dirname + '/utils/titulok02.png',
     },
     final: {
-      picture: __dirname + '/utils/mdfinalpage.png',
+      picture: __dirname + '/utils/mdfinalpage.jpeg',
     },
     qrcode: __dirname + '/utils/md-qr-code.png',
     email: `${email}`,
