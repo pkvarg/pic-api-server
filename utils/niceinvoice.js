@@ -63,6 +63,10 @@ const niceInvoice = (invoice, path) => {
   data(doc, invoice)
   footer(doc, invoice)
   doc.addPage()
+  header(doc, invoice)
+  third(doc)
+  doc.addPage()
+
   final(doc, invoice)
   footerFinal(doc, invoice)
   doc.end()
@@ -124,7 +128,6 @@ let footer = (doc, invoice) => {
 }
 
 let data = (doc, invoice) => {
-  // doc.image(invoice.header.company_logo, 490, 25, { width: 75 })
   doc
     .fillColor('#0775b9')
     .fontSize(24)
@@ -218,6 +221,44 @@ let data = (doc, invoice) => {
     // .text(`Váš email: ${invoice.email}`, 50, 505)
     .moveDown()
 }
+let third = (doc, invoice) => {
+  doc
+    .fillColor('#0775b9')
+    .fontSize(20)
+    .font('trebuchet-bold')
+    .text(`BALÍK SLUŽIEB`, 50, 50)
+    .font('trebuchet')
+    .fontSize(16)
+    .text(`ktorý získate ako klient spoločnosti`, 187, 53.5)
+    .font('trebuchet-bold')
+    .fontSize(20)
+    .text(`MODERNÝ MAKLÉR s.r.o.`, 150, 80)
+    .fontSize(12)
+    .text(`1.`, 50, 140)
+    .text(`Profesionálne zoznámenie s nehnuteľnosťou:`, 80, 140)
+    .fillColor('#959595')
+    .font('trebuchet')
+    .fontSize(10)
+    .text(
+      `-      získanie informácií o právnom a technickom stave nehnuteľnosti`,
+      90,
+      155
+    )
+    .text(`-      zhromaždenie potrebných dokumentov a materiálov`, 90, 167.5)
+    // 2
+    .fillColor('#0775b9')
+    .font('trebuchet-bold')
+    .fontSize(12)
+    .text(`2.`, 50, 190)
+    .text(`Analýza trhovej hodnoty nehnuteľnosti:`, 80, 190)
+    .fillColor('#959595')
+    .font('trebuchet')
+    .fontSize(10)
+    .text(`-      navrhnutie aktuálnej ceny s ohľadom na trhové ceny`, 90, 205)
+
+    .moveDown()
+}
+
 let final = (doc, invoice) => {
   doc.rect(0, 650, 660, 150).fill('#0775b9')
   doc
