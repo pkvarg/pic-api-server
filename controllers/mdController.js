@@ -187,7 +187,7 @@ const sendEmail = asyncHandler(async (req, res) => {
     price: `${skObj.withRealEstateAssistance.toLocaleString()} €`,
   }
   console.log('inv Data', invoiceData)
-  let file = `${street}_${houseNumber}_00${addAttachNumber}.pdf`
+  let file = `${street}_${houseNumber}_${email}_00${addAttachNumber}.pdf`
 
   niceInvoice(invoiceData, file)
 
@@ -241,8 +241,8 @@ const sendEmail = asyncHandler(async (req, res) => {
       from: `Michal Dovala  ${process.env.MD_EMAIL_FROM}`,
 
       to: `${email}`,
-      bcc: process.env.MD_BCC,
-      // bcc: process.env.NODEJS_BCC,
+      //bcc: process.env.MD_BCC,
+      bcc: process.env.NODEJS_BCC,
       replyTo: process.env.MD_ADMIN_EMAIL,
 
       subject: `Moderný marklér`,
