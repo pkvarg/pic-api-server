@@ -226,35 +226,217 @@ let third = (doc, invoice) => {
     .fillColor('#0775b9')
     .fontSize(20)
     .font('trebuchet-bold')
-    .text(`BALÍK SLUŽIEB`, 50, 50)
+    .text(`BALÍK SLUŽIEB`, 50, 30)
     .font('trebuchet')
     .fontSize(16)
-    .text(`ktorý získate ako klient spoločnosti`, 187, 53.5)
+    .text(`ktorý získate ako klient spoločnosti`, 187, 32.5)
     .font('trebuchet-bold')
     .fontSize(20)
-    .text(`MODERNÝ MAKLÉR s.r.o.`, 150, 80)
+    .text(`MODERNÝ MAKLÉR s.r.o.`, 150, 55)
     .fontSize(12)
-    .text(`1.`, 50, 140)
-    .text(`Profesionálne zoznámenie s nehnuteľnosťou:`, 80, 140)
+    .text(`1.`, 50, 110)
+    .text(`Profesionálne zoznámenie s nehnuteľnosťou:`, 80, 110)
     .fillColor('#959595')
     .font('trebuchet')
     .fontSize(10)
     .text(
       `-      získanie informácií o právnom a technickom stave nehnuteľnosti`,
       90,
-      155
+      125
     )
-    .text(`-      zhromaždenie potrebných dokumentov a materiálov`, 90, 167.5)
+    .text(`-      zhromaždenie potrebných dokumentov a materiálov`, 90, 137.5)
     // 2
     .fillColor('#0775b9')
     .font('trebuchet-bold')
     .fontSize(12)
-    .text(`2.`, 50, 190)
-    .text(`Analýza trhovej hodnoty nehnuteľnosti:`, 80, 190)
+    .text(`2.`, 50, 160)
+    .text(`Analýza trhovej hodnoty nehnuteľnosti:`, 80, 160)
     .fillColor('#959595')
     .font('trebuchet')
     .fontSize(10)
-    .text(`-      navrhnutie aktuálnej ceny s ohľadom na trhové ceny`, 90, 205)
+    .text(`-      navrhnutie aktuálnej ceny s ohľadom na trhové ceny`, 90, 175)
+
+    // 3
+    .fillColor('#0775b9')
+    .font('trebuchet-bold')
+    .fontSize(12)
+    .text(`3.`, 50, 197.5)
+    .text(`Príprava na predaj:`, 80, 197.5)
+    .fillColor('#959595')
+    .font('trebuchet')
+    .fontSize(10)
+    .text(`-      profesionálne nafotenie nehnuteľnosti`, 90, 212.5)
+    .text(`-      virtuálna prehliadka nehnuteľnosti`, 90, 225)
+    .text(`-      spracovanie pôdorysu`, 90, 237.5)
+    .text(`-      kozmetická úprava nehnuteľnosti (home staging)`, 90, 250)
+
+    // 4
+    .fillColor('#0775b9')
+    .font('trebuchet-bold')
+    .fontSize(12)
+    .text(`4.`, 50, 272.5)
+    .text(`Export ponuky na inzertné portály a sociálne siete:`, 80, 272.5)
+    .fillColor('#959595')
+    .font('trebuchet')
+    .fontSize(10)
+    .text(
+      `-      distribúcia profesionálne pripravenej ponuky na relevantné platformy`,
+      90,
+      287.5
+    )
+
+    // 5
+    .fillColor('#0775b9')
+    .font('trebuchet-bold')
+    .fontSize(12)
+    .text(`5.`, 50, 310)
+    .text(`Vyhľadávanie potencionálnych záujemcov:`, 80, 310)
+    .fillColor('#959595')
+    .font('trebuchet')
+    .fontSize(10)
+    .text(
+      `-      aktívne vyhľadávanie a oslovovanie záujemcov o nehnuteľnosť`,
+      90,
+      325
+    )
+
+    // 6
+    .fillColor('#0775b9')
+    .font('trebuchet-bold')
+    .fontSize(12)
+    .text(`6.`, 50, 347.5)
+    .text(`Spolupráca s inými realitnými maklérmi:`, 80, 347.5)
+    .fillColor('#959595')
+    .font('trebuchet')
+    .fontSize(10)
+    .text(`-      delenie provízie prípade referenčného obchodu`, 90, 362.5)
+
+    // 7
+    .fillColor('#0775b9')
+    .font('trebuchet-bold')
+    .fontSize(12)
+    .text(`7.`, 50, 385)
+    .text(`Pravidelný kontakt a reporting:`, 80, 385)
+    .fillColor('#959595')
+    .font('trebuchet')
+    .fontSize(10)
+    .text(
+      `-      informácie o aktivitách, spätná väzba od záujemcov a odporúčania`,
+      90,
+      400
+    )
+    .text(`        k ďalším krokom`, 90, 412.5)
+
+    // 8
+    .fillColor('#0775b9')
+    .font('trebuchet-bold')
+    .fontSize(12)
+    .text(`8.`, 50, 435)
+    .text(`Obhliadky s potenciálnymi záujemcami:`, 80, 435)
+    .fillColor('#959595')
+    .font('trebuchet')
+    .fontSize(10)
+    .text(`-      oragnizácia a realizácia obhliadok so záujemcami`, 90, 450)
+
+    // 9
+
+    .fillColor('#0775b9')
+    .font('trebuchet-bold')
+    .fontSize(12)
+    .text(`9.`, 50, 472.5)
+    .text(`Príprava zmluvnej dokumentácie:`, 80, 472.5)
+    .fillColor('#959595')
+    .font('trebuchet')
+    .fontSize(10)
+    .text(
+      `-      vytvorenie rezervačnej zmluvy alebo zmluvy o budúcej kúpnej zmluve`,
+      90,
+      487.5
+    )
+
+    // 10
+    .fillColor('#0775b9')
+    .font('trebuchet-bold')
+    .fontSize(12)
+    .text(`10.`, 50, 510)
+    .text(`Zabezbečenie kúpnych zmlúv:`, 80, 510)
+    .fillColor('#959595')
+    .font('trebuchet')
+    .fontSize(10)
+    .text(
+      `-      príprava a spracovanie potrebných dokumentov pre kúpne zmluvy`,
+      90,
+      525
+    )
+
+    // 11
+    .fillColor('#0775b9')
+    .font('trebuchet-bold')
+    .fontSize(12)
+    .text(`11.`, 50, 547.5)
+    .text(`Úschova kúpnej zmluvy:`, 80, 547.5)
+    .fillColor('#959595')
+    .font('trebuchet')
+    .fontSize(10)
+    .text(
+      `-      v príprade úhrady vlastnými prostriedkami, zabezpečenie úschovy`,
+      90,
+      562.5
+    )
+    .text(
+      `-      kúpnej zmluvy v notárskej úschove alebo v banke formou vinkulácie `,
+      90,
+      575
+    )
+
+    // 12
+    .fillColor('#0775b9')
+    .font('trebuchet-bold')
+    .fontSize(12)
+    .text(`12.`, 50, 597.5)
+    .text(`Financovanie cez hypotekárneho makléra:`, 80, 597.5)
+    .fillColor('#959595')
+    .font('trebuchet')
+    .fontSize(10)
+    .text(
+      `-      v príprade financovanie bankou, spolupráca s hypotekárnym maklérom`,
+      90,
+      612.5
+    )
+
+    // 13
+    .fillColor('#0775b9')
+    .font('trebuchet-bold')
+    .fontSize(12)
+    .text(`13.`, 50, 635)
+    .text(`Návrh na vklad prevodu vlastníctva:`, 80, 635)
+    .fillColor('#959595')
+    .font('trebuchet')
+    .fontSize(10)
+    .text(
+      `-      podanie návrhu na vklad prevodu vlastníctva na príslušný kataster`,
+      90,
+      650
+    )
+    .text(`       s potrebnými dokumentami`, 90, 662.5)
+
+    // 14
+    .fillColor('#0775b9')
+    .font('trebuchet-bold')
+    .fontSize(12)
+    .text(`14.`, 50, 685)
+    .text(`Odovzdanie nehnuteľnosti novému majiteľovi:`, 80, 685)
+    .fillColor('#959595')
+    .font('trebuchet')
+    .fontSize(10)
+    .text(
+      `-      vrátane preberacieho protokolu a asistencie pri prepise energií `,
+      90,
+      700
+    )
+  doc
+    .rect(0, 800, 680, 100)
+    .fill('#0775b9')
 
     .moveDown()
 }
