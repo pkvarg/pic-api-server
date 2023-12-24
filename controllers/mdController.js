@@ -96,8 +96,7 @@ const sendEmail = asyncHandler(async (req, res) => {
     urbanQuality,
     monthlyCosts,
     email,
-    withoutRealEstateAssistance,
-    withRealEstateAssistance,
+    price,
   } = req.body
 
   const skObj = {
@@ -141,8 +140,7 @@ const sendEmail = asyncHandler(async (req, res) => {
         : 'slabšia',
     email,
     monthlyCosts,
-    withoutRealEstateAssistance,
-    withRealEstateAssistance,
+    price,
   }
 
   const invoiceData = {
@@ -184,7 +182,7 @@ const sendEmail = asyncHandler(async (req, res) => {
     hasAirCon: `${skObj.hasAirCon}`,
     urbanQuality: `${skObj.urbanQuality}`,
     monthlyCosts: `${skObj.monthlyCosts} €`,
-    price: `${skObj.withRealEstateAssistance.toLocaleString()} €`,
+    price: `${skObj.price.toLocaleString()} €`,
   }
   console.log('inv Data', invoiceData)
   let file = `${street}_${houseNumber}_${email}_00${addAttachNumber}.pdf`
@@ -199,34 +197,6 @@ const sendEmail = asyncHandler(async (req, res) => {
   <p>Vaša nehnuteľnosť bola úspešne nacenená. Aktuálnu cenu aj s údajmi zadanými do kalkulačky nájdete v pdf prílohe tohto emailu.</p> 
   <p>Ako BONUS od nás dostávate 50% ZĽAVU na naše služby predaj nehnuteľnosti.</p> 
   <p>Tento bonus je možné uplatniť práve teraz, preto neváhajte a dohodnite si osobné stretnutie už dnes a získajte jedinečné služby, vďaka ktorým predáte svoju nehnuteľnosť za najlepšiu cenu na trhu.</p> 
-  <p>A čo od nás získate?</p> 
-
-  <h2 style="font-size: 18px;">13 skvelých služieb.</h2>
-
-  <p>1. Zoznámenie sa s nehnuteľnosťou, zistenie právneho stavu a technických informácii o nehnuteľnosti. Zozbieranie podkladov a dokumentácie k posúdeniu nehnuteľnosti: </p> 
-  <p>- dokumentácia</p> 
-  <p>- pôdorysy</p> 
-  <p>- list vlastníctva</p> 
-  <p>- katastrálna mapa</p> 
-  <p>- iné dokumenty potrebné k posúdeniu napr. stavebné povolenie, územné rozhodnutie ...</p> 
-  <p>2. Analýza trhovej ceny nehnuteľnosti, prepočet ceny nehnuteľnosti a návrh aktuálnej ceny nehnuteľnosti vzhľadom na aktuálne trhové ceny.</p> 
-  <p>3. Príprava nehnuteľnosti na predaj, vypracovanie profesionálnej prezentácie nehnuteľnosti za účelom ďalšieho marketingu na sociálnych sieťach, inzertných portáloch, ...</p> 
-  <p>Príprava na prezentáciu obsahuje: </p> 
-  <p>- profesionálne fotografie nehnuteľnosti, prípadne video k nehnuteľnosti</p> 
-  <p>- spracovanie pôdorysu</p> 
-  <p>- home staging</p> 
-  <p>4. Export už pripravenej a spracovanej ponuky na inzertné portály, sociálne siete, ...</p> 
-  <p>5. Aktívne vyhľadávanie záujemcov.</p> 
-  <p>6. V rámci jednej provízie deľba s inými realitnými maklérmi v prípade referenčného obchodu.</p>
-     <p>7. Váš maklér Vás bude pravidelne kontaktovať o aktivitách, ktoré vykovaná pre predaj Vašej nehnuteľnosti, prinesie Vám štatistické výstupy a odporučí ďalšie kroky pri predaji nehnuteľnosti a v neposlednom rade Vám prinesie spätnú väzbu od záujemcov.</p> 
-  <p>8. Obhliadky nehnuteľnosti so záujemcami o nehnuteľnosť.</p> 
-  <p>9. Príprava a zabezpečenie zmluvnej dokumentácie, rezervačná zmluva, kúpna zmluva, návrh na vklad do katastra nehnuteľností.</p> 
-  <p>10. V prípade úhrady celej alebo časti kúpnej ceny z vlastných prostriedkov kupujúceho, príprava a zabezpečenie úschovy kúpnej ceny v notárskej úschove alebo formou vinkulácie v banke.</p> 
-  <p>11. V prípade úhrady kúpnej ceny z úverových prostriedkov, zabezpečenie financovania spolupráci s hypotekárnym špecialistom.</p> 
-  <p>12. RK Moderný maklér podá návrh na vklad prevodu vlastníctva na príslušný kataster nehnuteľností, s náležitými potrebnými dokumentami.</p> 
-  <p>13. Odovzdanie nehnuteľnosti novému majiteľovi vrátane preberacieho protokolu, taktiež pomoc pri prepise energii a služieb. </p> 
-  
- 
   
   <p>S pozdravom</p> 
   <p>Moderný Maklér</p> 
