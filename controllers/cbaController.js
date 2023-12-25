@@ -1,5 +1,91 @@
 import asyncHandler from 'express-async-handler'
 import cbaBlog from './../models/cbaBlogModel.js'
+import cbaUser from '../models/cbaUserModel.js'
+
+// POST api/cba/newuser
+
+const createNewUser = asyncHandler(async (req, res) => {
+  const { emailToDb } = req.body
+  try {
+    const userExists = await cbaUser.findOne({
+      email: emailToDb,
+    })
+
+    if (userExists) {
+      return res.status(200).send(`Užívateľ s emailom ${emailToDb} už existuje`)
+    } else {
+      const user = new cbaUser({
+        name: 'new user',
+        email: emailToDb,
+        hashedPassword: '123',
+        isAdmin: false,
+      })
+      const createdUser = await user.save()
+      res.status(201).json(createdUser)
+    }
+  } catch (error) {
+    console.log(error)
+    res.json('error creating user', error)
+  }
+})
+
+// GET api/cba/getUserById/:id
+
+const getUserById = asyncHandler(async (req, res) => {
+  const { id } = req.params
+  try {
+    const user = await cbaUser.findById({ _id: id })
+    if (user) {
+      console.log(user)
+      res.json(user)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+// PUT api/cba/edituser/:id
+
+const edituser = asyncHandler(async (req, res) => {
+  const { id } = req.params
+  const { name, email, isAdmin } = req.body
+
+  try {
+    const user = await cbaUser.findById({ _id: id })
+    if (user) {
+      user.name = name
+      user.email = email
+      user.isAdmin = isAdmin
+    }
+
+    const savedUser = await user.save()
+    res.json(savedUser)
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+// DEL api/cba/deleteuser/:id
+
+const deleteuser = asyncHandler(async (req, res) => {
+  const { id } = req.params
+
+  try {
+    const user = await cbaUser.deleteOne({ _id: id })
+
+    res.json('Užívateľ vymazaný')
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+// GET api/cba/getall
+const getAllUsers = asyncHandler(async (req, res) => {
+  const users = await cbaUser.find({})
+  if (users) {
+    res.json(users)
+  }
+})
 
 // POST api/cba/blog
 
@@ -94,4 +180,9 @@ export {
   updateSingleBlog,
   deleteSingleBlog,
   getBlogsByCategory,
+  createNewUser,
+  getAllUsers,
+  getUserById,
+  edituser,
+  deleteuser,
 }
