@@ -1,6 +1,25 @@
 import asyncHandler from 'express-async-handler'
 import cbaBlog from './../models/cbaBlogModel.js'
 import cbaUser from '../models/cbaUserModel.js'
+import generateToken from '../utils/generateToken.js'
+
+// POST api/cba/login
+const authUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body
+  const user = await cbaUser.findOne({ email })
+  if (user && (await user.matchPassword(password))) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
+    })
+  } else {
+    res.status(401)
+    throw new Error('Naplatný email alebo heslo')
+  }
+})
 
 // POST api/cba/newuser
 
@@ -17,7 +36,7 @@ const createNewUser = asyncHandler(async (req, res) => {
       const user = new cbaUser({
         name: 'new user',
         email: emailToDb,
-        hashedPassword: '123',
+        password: '123',
         isAdmin: false,
       })
       const createdUser = await user.save()
@@ -185,4 +204,5 @@ export {
   getUserById,
   edituser,
   deleteuser,
+  authUser,
 }

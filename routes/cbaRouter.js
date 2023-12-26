@@ -11,6 +11,7 @@ import {
   getUserById,
   edituser,
   deleteuser,
+  authUser,
 } from '../controllers/cbaController.js'
 
 const router = express.Router()
@@ -26,5 +27,6 @@ router.get('/getall', getAllUsers)
 router.get('/getUserById/:id', getUserById)
 router.put('/edituser/:id', edituser)
 router.delete('/deleteuser/:id', deleteuser)
+router.post('/login', authUser)
 
 export default router
