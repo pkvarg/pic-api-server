@@ -14,6 +14,12 @@ const cbaBlogSchema = mongoose.Schema(
     text: {
       type: String,
     },
+    upcoming: {
+      type: Boolean,
+    },
+    english: {
+      type: Boolean,
+    },
   },
 
   {

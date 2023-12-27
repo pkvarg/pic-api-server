@@ -16,8 +16,7 @@ const authUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
     })
   } else {
-    res.status(401)
-    throw new Error('Naplatný email alebo heslo')
+    res.json('Neplatný email alebo heslo')
   }
 })
 
@@ -67,13 +66,17 @@ const getUserById = asyncHandler(async (req, res) => {
 
 const edituser = asyncHandler(async (req, res) => {
   const { id } = req.params
-  const { name, email, isAdmin } = req.body
+  const { name, email, newPassword, isAdmin } = req.body
 
   try {
     const user = await cbaUser.findById({ _id: id })
+
     if (user) {
       user.name = name
       user.email = email
+      if (newPassword) {
+        user.password = newPassword
+      }
       user.isAdmin = isAdmin
     }
 
@@ -109,13 +112,15 @@ const getAllUsers = asyncHandler(async (req, res) => {
 // POST api/cba/blog
 
 const createBlog = asyncHandler(async (req, res) => {
-  const { title, category, media, text } = req.body
+  const { title, category, media, text, upcoming, english } = req.body
 
   const newCbaBlog = new cbaBlog({
     title,
     category,
     media,
     text,
+    upcoming,
+    english,
   })
 
   const createdNewCbaBlog = await newCbaBlog.save()
@@ -144,13 +149,16 @@ const getSingleBlog = asyncHandler(async (req, res) => {
 // PUT api/cba/blogs/update/:id
 
 const updateSingleBlog = asyncHandler(async (req, res) => {
-  const { title, category, media, text } = req.body
+  const { title, category, media, text, upcoming } = req.body
   const blog = await cbaBlog.findById(req.params.id)
   if (blog) {
     blog.title = title
     blog.category = category
     blog.media = media || ''
     blog.text = text
+    if (upcoming) {
+      blog.upcoming = upcoming
+    }
 
     const savedBlog = await blog.save()
 
