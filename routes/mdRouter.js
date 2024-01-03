@@ -2,6 +2,7 @@ import express from 'express'
 import {
   contactEmail,
   sendEmail,
+  sendEmailHouse,
   getAttachmentsCount,
   saveDownloadsEmail,
   getEmails,
@@ -10,6 +11,8 @@ import {
 const router = express.Router()
 
 router.put('/email', sendEmail)
+
+router.put('/email-house', sendEmailHouse)
 
 router.put('/contact', contactEmail)
 

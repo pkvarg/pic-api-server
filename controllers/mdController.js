@@ -274,8 +274,137 @@ const contactEmail = asyncHandler(async (req, res) => {
   }
 })
 
+const sendEmailHouse = asyncHandler(async (req, res) => {
+  const addAttachNumber = await incAttachmentsCount()
+  const { calcValues } = req.body
+  const skObj = {
+    flatOrHouse: calcValues.flatOrHouse === 'flat' ? 'Byt' : 'dom',
+    city: calcValues.city,
+    street: calcValues.street,
+    houseNumber: calcValues.houseNumber,
+    countRooms: calcValues.countRooms,
+    countBathrooms: calcValues.countBathrooms,
+    houseCondition:
+      calcValues.houseCondition === 1
+        ? 'Novostavba'
+        : calcValues.houseCondition === 2
+        ? 'Vynikajúci'
+        : calcValues.houseCondition === 3
+        ? 'Dobrý'
+        : 'Pôvodný',
+    squareMeters: calcValues.squareMeters,
+    houseType: calcValues.houseType,
+    hasPool: calcValues.hasPool === true ? 'Áno' : 'Nie',
+    hasSauna: calcValues.hasSauna === true ? 'Áno' : 'Nie',
+    hasGardenShed: calcValues.hasGardenShed === true ? 'Áno' : 'Nie',
+    hasGarage: calcValues.hasGarage === true ? 'Áno' : 'Nie',
+    hasBasement: calcValues.hasBasement === true ? 'Áno' : 'Nie',
+    hasTerrace: calcValues.hasTerrace === true ? 'Áno' : 'Nie',
+    landType:
+      calcValues.landType === 1
+        ? 'Rovinatý'
+        : calcValues.landType === 2
+        ? 'Svahovitý'
+        : calcValues.landType === 3
+        ? 'Strmý svah'
+        : 'Terasovitý',
+    landSquareMeters: calcValues.landSquareMeters,
+    builtYear: calcValues.builtYear,
+    hasThermostat: calcValues.hasThermostat === true ? 'Áno' : 'Nie',
+    hasAlarm: calcValues.hasAlarm === true ? 'Áno' : 'Nie',
+    hasFireAlarm: calcValues.hasFireAlarm === true ? 'Áno' : 'Nie',
+    hasSolarCollectors: calcValues.hasSolarCollectors === true ? 'Áno' : 'Nie',
+    hasCameraSystem: calcValues.hasCameraSystem === true ? 'Áno' : 'Nie',
+    hasInternet: calcValues.hasInternet === true ? 'Áno' : 'Nie',
+    hasWell: calcValues.hasWell === true ? 'Áno' : 'Nie',
+    hasCityWater: calcValues.hasCityWater === true ? 'Áno' : 'Nie',
+    hasCitySewerage: calcValues.hasCitySewerage === true ? 'Áno' : 'Nie',
+    hasSeptic: calcValues.hasSeptic === true ? 'Áno' : 'Nie',
+    hasElectricity: calcValues.hasElectricity === true ? 'Áno' : 'Nie',
+    hasGas: calcValues.hasGas === true ? 'Áno' : 'Nie',
+    urbanQuality:
+      calcValues.urbanQuality === 'average'
+        ? 'priemerná'
+        : calcValues.urbanQuality === 'excellent'
+        ? 'výborná'
+        : 'slabšia',
+    hasElectricRadiators:
+      calcValues.hasElectricRadiators === true ? 'Áno' : 'Nie',
+    hasHeatPump: calcValues.hasHeatPump === true ? 'Áno' : 'Nie',
+    hasOther: calcValues.hasOther === true ? 'Áno' : 'Nie',
+    hasSolidFuel: calcValues.hasSolidFuel === true ? 'Áno' : 'Nie',
+    hasGasBoiler: calcValues.hasGasBoiler === true ? 'Áno' : 'Nie',
+    hasUnderfloorHeating:
+      calcValues.hasUnderfloorHeating === true ? 'Áno' : 'Nie',
+    email: calcValues.email,
+
+    price: calcValues.price,
+  }
+  console.log('house here skObj', skObj)
+
+  const invoiceData = {
+    header: {
+      company_logo: __dirname + '/utils/titulok01.png',
+    },
+    body: {
+      city: __dirname + '/utils/titulok02.png',
+    },
+    final: {
+      picture: __dirname + '/utils/mdfinalpage.jpeg',
+    },
+    qrcode: __dirname + '/utils/md-qr-code.png',
+    email: `${skObj.email}`,
+    flatOrHouse: `${skObj.flatOrHouse}`,
+    city: `${skObj.city}`,
+    street: `${skObj.street}`,
+    houseNumber: `${skObj.houseNumber}`,
+    countRooms: `${skObj.countRooms}`,
+    countBathrooms: `${skObj.countBathrooms}`,
+    houseCondition: `${skObj.houseCondition}`,
+    squareMeters: `${skObj.squareMeters} m2`,
+
+    houseType: `${skObj.houseType}`,
+
+    hasPool: `${skObj.hasPool}`,
+    hasSauna: `${skObj.hasSauna}`,
+    hasGardenShed: `${skObj.hasGardenShed}`,
+    hasGarage: `${skObj.hasGarage}`,
+    hasBasement: `${skObj.hasBasement}`,
+    hasTerrace: `${skObj.hasTerrace}`,
+    landType: `${skObj.landType}`,
+    landSquareMeters: `${skObj.landSquareMeters}`,
+    builtYear: `${skObj.builtYear}`,
+    hasThermostat: `${skObj.hasThermostat}`,
+    hasAlarm: `${skObj.hasAlarm}`,
+    hasFireAlarm: `${skObj.hasFireAlarm}`,
+    hasSolarCollectors: `${skObj.hasSolarCollectors}`,
+    hasCameraSystem: `${skObj.hasCameraSystem}`,
+    hasInternet: `${skObj.hasInternet}`,
+    hasWell: `${skObj.hasWell}`,
+    hasCityWater: `${skObj.hasCityWater}`,
+
+    hasCitySewerage: `${skObj.hasCitySewerage}`,
+    hasSeptic: `${skObj.hasSeptic}`,
+    hasElectricity: `${skObj.hasElectricity}`,
+    hasSeptic: `${skObj.hasSeptic}`,
+    hasGas: `${skObj.hasGas}`,
+    urbanQuality: `${skObj.urbanQuality}`,
+    hasElectricRadiators: `${skObj.hasElectricRadiators}`,
+    hasHeatPump: `${skObj.hasHeatPump}`,
+    hasOther: `${skObj.hasOther}`,
+    hasSolidFuel: `${skObj.hasSolidFuel}`,
+    hasGasBoiler: `${skObj.hasGasBoiler}`,
+    hasUnderfloorHeating: `${skObj.hasUnderfloorHeating}`,
+
+    price: `${skObj.price.toLocaleString()} €`,
+  }
+  console.log('inv Data House', invoiceData)
+  let file = `${calcValues.street}_${calcValues.houseNumber}_${calcValues.email}_00${addAttachNumber}.pdf`
+})
+
 export {
   sendEmail,
+  sendEmailHouse,
   contactEmail,
   getAttachmentsCount,
   saveDownloadsEmail,
