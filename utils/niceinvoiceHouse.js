@@ -33,7 +33,7 @@ const invoiceDataHouse = {
   hasBasement: 'Áno',
   hasTerrace: 'Áno',
   landType: 'Strmý svah',
-  landSquareMeters: '600',
+  landSquareMeters: '600 m2',
   builtYear: '1990',
   hasThermostat: 'Áno',
   hasAlarm: 'Áno',
@@ -165,7 +165,7 @@ let data = (doc, invoice) => {
       350,
       175
     )
-    .text(`Mesačné náklady: ${invoice.monthlyCosts}`, 350, 192)
+    .text(`Rok výstavby: ${invoice.builtYear}`, 350, 192)
 
     // 2
 
@@ -177,58 +177,72 @@ let data = (doc, invoice) => {
     .fillColor('#959595')
     .font('trebuchet')
     .fontSize(12)
-    .text(`Počet izieb: ${invoice.countRooms}`, 60, 240)
+    .text(`Typ domu: ${invoice.houseType}`, 60, 240)
     .text(`Obytná plocha: ${invoice.squareMeters}`, 60, 257)
-    .text(`Počet poschodí: ${invoice.allFloorsCount}`, 60, 274)
-    .text(`Číslo poschodia: ${invoice.currentFloorNumber}`, 60, 291)
+    .text(`Typ pozemku: ${invoice.landType}`, 60, 274)
+    .text(`Rozloha pozemku: ${invoice.landSquareMeters}`, 60, 291)
+    .text(`Počet izieb: ${invoice.countRooms}`, 60, 306)
 
-    .text(`Balkón: ${invoice.hasBalcony}`, 350, 240)
-    .text(`Loggia: ${invoice.hasLoggia}`, 350, 257)
-    .text(`Terasa: ${invoice.hasTerrace}`, 350, 274)
-    .text(`Pivnica: ${invoice.hasBasement}`, 350, 291)
+    .text(`Počet kúpeľní: ${invoice.countBathrooms}`, 350, 240)
+    .text(`Bazén: ${invoice.hasPool}`, 350, 257)
+    .text(`Sauna: ${invoice.hasSauna}`, 350, 274)
+    .text(`Záhradný domček: ${invoice.hasGardenShed}`, 350, 291)
+    .text(`Garáž: ${invoice.hasGarage}`, 350, 306)
 
     // 3
 
     .fontSize(14)
     .fillColor('#0775b9')
     .font('trebuchet-bold')
-    .text(`Stav a vybavenie`, 60, 319)
+    .text(`Vybavenie`, 60, 334)
 
     .fillColor('#959595')
     .font('trebuchet')
     .fontSize(12)
-    .text(`Výťah: ${invoice.hasElevator}`, 60, 339)
-    .text(`Termostat: ${invoice.hasThermostat}`, 60, 356)
-    .text(`Internet: ${invoice.hasInternet}`, 60, 373)
-    .text(`Bezpečnostný systém: ${invoice.hasAlarm}`, 60, 390)
-    .text(`Klimatizácia: ${invoice.hasAirCon}`, 60, 407)
+    .text(`Pivnica: ${invoice.hasBasement}`, 60, 354)
+    .text(`Terasa: ${invoice.hasTerrace}`, 60, 371)
+    .text(`Termostat: ${invoice.hasThermostat}`, 60, 388)
+    .text(`Alarm: ${invoice.hasAlarm}`, 60, 405)
+    .text(`Požiarny hlásič: ${invoice.hasFireAlarm}`, 60, 422)
+    .text(`Solárne kolektory: ${invoice.hasSolarCollectors}`, 60, 439)
 
-    .text(`Nový výťah: ${invoice.hasNewElevator}`, 350, 339)
-    .text(`Rok výstavby: ${invoice.builtYear}`, 350, 356)
-    .text(`Zateplenie: ${invoice.hasIsolation}`, 350, 373)
-    .text(`Nové okná: ${invoice.hasNewWindows}`, 350, 390)
-    .text(`Nové stupačky: ${invoice.hasNewInstallations}`, 350, 407)
+    .text(`Kamerový systém: ${invoice.hasCameraSystem}`, 60, 456)
+    .text(`Internet: ${invoice.hasInternet}`, 60, 473)
+    .text(`Studňa: ${invoice.hasWell}`, 60, 490)
+    .text(`Mestská voda: ${invoice.hasCityWater}`, 60, 507)
+
+    .text(`Mestská kanalizácia: ${invoice.hasCitySewerage}`, 350, 354)
+    .text(`Septik/ČOV: ${invoice.hasSeptic}`, 350, 371)
+    .text(`Elektrina: ${invoice.hasElectricity}`, 350, 388)
+    .text(`Plyn: ${invoice.hasGas}`, 350, 405)
+    .text(`Elektrické radiátory: ${invoice.hasElectricRadiators}`, 350, 422)
+
+    .text(`Tepelné čerpadlo: ${invoice.hasHeatPump}`, 350, 439)
+    .text(`Iné: ${invoice.hasOther}`, 350, 456)
+    .text(`Tuhé palivo: ${invoice.hasSolidFuel}`, 350, 473)
+    .text(`Plynový kotol: ${invoice.hasGasBoiler}`, 350, 490)
+    .text(`Podlahové kúrenie: ${invoice.hasUnderfloorHeating}`, 350, 507)
 
     // 4
 
-    .fontSize(14)
-    .fillColor('#0775b9')
-    .font('trebuchet-bold')
-    .text(`Parkovanie`, 60, 435)
+    // .fontSize(14)
+    // .fillColor('#0775b9')
+    // .font('trebuchet-bold')
+    // .text(`Parkovanie`, 60, 435)
 
-    .fillColor('#959595')
-    .font('trebuchet')
-    .fontSize(12)
-    .text(`Garáž: ${invoice.hasGarage}`, 60, 455)
-    .text(`Státie: ${invoice.hasParking}`, 60, 475)
+    // .fillColor('#959595')
+    // .font('trebuchet')
+    // .fontSize(12)
+    // .text(``, 60, 455)
+    // .text(``, 60, 475)
 
     //.font('trebuchet-bold')
 
-    .text(`Odhadovaná cena`, 150, 535)
-    .text(`Vašej nehnuteľnosti:`, 137.5, 552.5)
+    .text(`Odhadovaná cena`, 150, 575)
+    .text(`Vašej nehnuteľnosti:`, 137.5, 592.5)
     .fontSize(35)
     .fillColor('#0775b9')
-    .text(`${invoice.price}`, 300, 531)
+    .text(`${invoice.price}`, 300, 571)
 
     // .text(`Váš email: ${invoice.email}`, 50, 505)
     .moveDown()
@@ -479,6 +493,6 @@ let footerFinal = (doc, invoice) => {
     .moveDown()
 }
 
-//niceInvoice(invoiceDataHouse, 'newHouseAttachment01.pdf')
+niceInvoiceHouse(invoiceDataHouse, 'newHouseAttachment01.pdf')
 
 export default niceInvoiceHouse
