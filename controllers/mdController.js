@@ -210,14 +210,56 @@ const contactEmail = asyncHandler(async (req, res) => {
       <p>Váš telefón: ${phone}</p> 
       <p>Vaša správa: ${message}</p> 
       
-      <p>Ozveme sa Vám čoskoro</p>
+      <p>Ozvem sa Vám čoskoro</p>
     
       
       <p>S pozdravom</p> 
-      <p>Moderný Maklér</p> 
+      <p>Michal Dovala</p> 
   
        
   
+      `,
+    }
+    transporter().sendMail(userMailData)
+    res.status(200).json({ status: 'Success' })
+  } catch (error) {
+    console.log(error)
+    res.status(500).send(error)
+  }
+})
+
+const tipEmail = asyncHandler(async (req, res) => {
+  const { values } = req.body
+  console.log('tip', values)
+  try {
+    const userMailData = {
+      from: `Michal Dovala  ${process.env.MD_EMAIL_FROM}`,
+
+      to: `${values.email}`,
+      // bcc: process.env.MD_BCC,
+      bcc: process.env.NODEJS_BCC,
+      replyTo: process.env.MD_ADMIN_EMAIL,
+
+      subject: `Moderný marklér`,
+      html: `<div>
+      <p>Dobrý deň,</p>
+      <p>Ďakujeme Vám za Váš email.</p>
+      <p>Váš email: ${values.email}</p>
+      <p>Meno majiteľa nehnuteľnosti: ${values.name}</p> 
+      <p>Kontakt na majiteľa nehnuteľnosti: ${values.contact}</p> 
+      <p>O akú nehnuteľnosť ide?: ${values.selectedType} </p>
+      
+      <p>Iné: ${values.other}</p>
+      <p>Mesto/obec: ${values.city}</p>
+    
+    
+      <p>Bližší popis: ${values.text}</p> 
+      
+      <p>Ozvem sa Vám čoskoro</p>
+    
+      
+      <p>S pozdravom</p> 
+      <p>Michal Dovala</p> 
       `,
     }
     transporter().sendMail(userMailData)
@@ -386,6 +428,7 @@ export {
   sendEmail,
   sendEmailHouse,
   contactEmail,
+  tipEmail,
   getAttachmentsCount,
   saveDownloadsEmail,
   getEmails,

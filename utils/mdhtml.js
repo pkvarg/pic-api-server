@@ -8,7 +8,7 @@ export const html = `<html>
   <p>Tento bonus je možné uplatniť práve teraz, preto neváhajte a dohodnite si osobné stretnutie už dnes a získajte jedinečné služby, vďaka ktorým predáte svoju nehnuteľnosť za najlepšiu cenu na trhu.</p> 
   
   <p>S pozdravom</p> 
-  <p>Moderný Maklér</p> 
+  <p>Michal Dovala</p> 
   </div>
 </body>
 
