@@ -289,7 +289,14 @@ const sendEmailHouse = asyncHandler(async (req, res) => {
         ? 'Dobrý'
         : 'Pôvodný',
     squareMeters: calcValues.squareMeters,
-    houseType: calcValues.houseType,
+    houseType:
+      calcValues.houseType === 1
+        ? 'Bungalov'
+        : calcValues.houseType === 2
+        ? 'Klasický dom'
+        : calcValues.houseType === 3
+        ? 'Dvojgeneračný dom'
+        : 'Rodinná vila',
     hasPool: calcValues.hasPool === true ? 'Áno' : 'Nie',
     hasSauna: calcValues.hasSauna === true ? 'Áno' : 'Nie',
     hasGardenShed: calcValues.hasGardenShed === true ? 'Áno' : 'Nie',
