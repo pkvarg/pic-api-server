@@ -3,6 +3,8 @@ import nodemailer from 'nodemailer'
 import Attachments from '../models/md_sentModel.js'
 import Emails from '../models/md_emails.js'
 import niceInvoice from '../utils/niceinvoice.js'
+import niceInvoiceHouse from '../utils/niceinvoiceHouse.js'
+import { html } from '../utils/mdhtml.js'
 import path from 'path'
 const __dirname = path.resolve()
 
@@ -66,81 +68,51 @@ const time = new Date()
 
 const sendEmail = asyncHandler(async (req, res) => {
   const addAttachNumber = await incAttachmentsCount()
-
-  const {
-    flatOrHouse,
-    city,
-    street,
-    houseNumber,
-    countRooms,
-    houseCondition,
-    squareMeters,
-    allFloorsCount,
-    currentFloorNumber,
-    hasElevator,
-    hasBalcony,
-    hasLoggia,
-    hasTerrace,
-    hasBasement,
-    hasGarage,
-    hasParking,
-    builtYear,
-    hasIsolation,
-    hasNewElevator,
-    hasNewWindows,
-    hasNewInstallations,
-    hasThermostat,
-    hasInternet,
-    hasAlarm,
-    hasAirCon,
-    urbanQuality,
-    monthlyCosts,
-    email,
-    price,
-  } = req.body
+  const { calcValues } = req.body
 
   const skObj = {
-    flatOrHouse: flatOrHouse === 'flat' ? 'Byt' : 'dom',
-    city,
-    street,
-    houseNumber,
-    countRooms,
+    flatOrHouse: calcValues.flatOrHouse === 'flat' ? 'Byt' : 'dom',
+    city: calcValues.city,
+    street: calcValues.street,
+    houseNumber: calcValues.houseNumber,
+    countRooms: calcValues.countRooms,
     houseCondition:
-      houseCondition === 1
+      calcValues.houseCondition === 1
         ? 'Novostavba'
-        : houseCondition === 2
+        : calcValues.houseCondition === 2
         ? 'Vynikajúci'
-        : houseCondition === 3
+        : calcValues.houseCondition === 3
         ? 'Dobrý'
         : 'Pôvodný',
-    squareMeters,
-    allFloorsCount,
-    currentFloorNumber,
-    hasElevator: hasElevator === 'hasElevator' ? 'Áno' : 'Nie',
-    hasBalcony: hasBalcony === true ? 'Áno' : 'Nie',
-    hasLoggia: hasLoggia === true ? 'Áno' : 'Nie',
-    hasTerrace: hasTerrace === true ? 'Áno' : 'Nie',
-    hasBasement: hasBasement === true ? 'Áno' : 'Nie',
-    hasGarage: hasGarage === true ? 'Áno' : 'Nie',
-    hasParking: hasParking === true ? 'Áno' : 'Nie',
-    builtYear,
-    hasIsolation: hasIsolation === true ? 'Áno' : 'Nie',
-    hasNewElevator: hasNewElevator === true ? 'Áno' : 'Nie',
-    hasNewWindows: hasNewWindows === true ? 'Áno' : 'Nie',
-    hasNewInstallations: hasNewInstallations === true ? 'Áno' : 'Nie',
-    hasThermostat: hasThermostat === true ? 'Áno' : 'Nie',
-    hasInternet: hasInternet === true ? 'Áno' : 'Nie',
-    hasAlarm: hasAlarm === true ? 'Áno' : 'Nie',
-    hasAirCon: hasAirCon === true ? 'Áno' : 'Nie',
+    squareMeters: calcValues.squareMeters,
+    allFloorsCount: calcValues.allFloorsCount,
+    currentFloorNumber: calcValues.currentFloorNumber,
+    hasElevator: calcValues.hasElevator === 'hasElevator' ? 'Áno' : 'Nie',
+    hasBalcony: calcValues.hasBalcony === true ? 'Áno' : 'Nie',
+    hasLoggia: calcValues.hasLoggia === true ? 'Áno' : 'Nie',
+    hasTerrace: calcValues.hasTerrace === true ? 'Áno' : 'Nie',
+    hasBasement: calcValues.hasBasement === true ? 'Áno' : 'Nie',
+    hasGarage: calcValues.hasGarage === true ? 'Áno' : 'Nie',
+    hasParking: calcValues.hasParking === true ? 'Áno' : 'Nie',
+    builtYear: calcValues.builtYear,
+    hasIsolation: calcValues.hasIsolation === true ? 'Áno' : 'Nie',
+    hasNewElevator: calcValues.hasNewElevator === true ? 'Áno' : 'Nie',
+    hasNewWindows: calcValues.hasNewWindows === true ? 'Áno' : 'Nie',
+    hasNewInstallations:
+      calcValues.hasNewInstallations === true ? 'Áno' : 'Nie',
+    hasThermostat: calcValues.hasThermostat === true ? 'Áno' : 'Nie',
+    hasInternet: calcValues.hasInternet === true ? 'Áno' : 'Nie',
+    hasAlarm: calcValues.hasAlarm === true ? 'Áno' : 'Nie',
+    hasAirCon: calcValues.hasAirCon === true ? 'Áno' : 'Nie',
     urbanQuality:
-      urbanQuality === 'average'
+      calcValues.urbanQuality === 'average'
         ? 'priemerná'
-        : urbanQuality === 'excellent'
+        : calcValues.urbanQuality === 'excellent'
         ? 'výborná'
         : 'slabšia',
-    email,
-    monthlyCosts,
-    price,
+    email: calcValues.email,
+    monthlyCosts: calcValues.monthlyCosts,
+    price: calcValues.price,
   }
 
   const invoiceData = {
@@ -154,7 +126,7 @@ const sendEmail = asyncHandler(async (req, res) => {
       picture: __dirname + '/utils/mdfinalpage.jpeg',
     },
     qrcode: __dirname + '/utils/md-qr-code.png',
-    email: `${email}`,
+    email: `${skObj.email}`,
     flatOrHouse: `${skObj.flatOrHouse}`,
     city: `${skObj.city}`,
     street: `${skObj.street}`,
@@ -184,33 +156,16 @@ const sendEmail = asyncHandler(async (req, res) => {
     monthlyCosts: `${skObj.monthlyCosts} €`,
     price: `${skObj.price.toLocaleString()} €`,
   }
-  console.log('inv Data', invoiceData)
-  let file = `${street}_${houseNumber}_${email}_00${addAttachNumber}.pdf`
+  console.log('inv Data Flat', invoiceData)
+  let file = `${calcValues.street}_${calcValues.houseNumber}_${calcValues.email}_00${addAttachNumber}.pdf`
 
   niceInvoice(invoiceData, file)
-
-  const html = `<html>
- 
-<body>
-  <div style="font-size: 16px; text-align: justify; line-height: 32px;">
-  <h3 style="font-size: 18px">Gratulujeme,</h3>
-  <p>Vaša nehnuteľnosť bola úspešne nacenená. Aktuálnu cenu aj s údajmi zadanými do kalkulačky nájdete v pdf prílohe tohto emailu.</p> 
-  <p>Ako BONUS od nás dostávate 50% ZĽAVU na naše služby predaj nehnuteľnosti.</p> 
-  <p>Tento bonus je možné uplatniť práve teraz, preto neváhajte a dohodnite si osobné stretnutie už dnes a získajte jedinečné služby, vďaka ktorým predáte svoju nehnuteľnosť za najlepšiu cenu na trhu.</p> 
-  
-  <p>S pozdravom</p> 
-  <p>Moderný Maklér</p> 
-  </div>
-</body>
-
-  </html>
-        `
 
   try {
     const userMailData = {
       from: `Michal Dovala  ${process.env.MD_EMAIL_FROM}`,
 
-      to: `${email}`,
+      to: `${calcValues.email}`,
       //bcc: process.env.MD_BCC,
       bcc: process.env.NODEJS_BCC,
       replyTo: process.env.MD_ADMIN_EMAIL,
@@ -229,7 +184,6 @@ const sendEmail = asyncHandler(async (req, res) => {
     res.json({ status: 'Success' })
   } catch (error) {
     console.log(error)
-    //res.json({ status: error })
     res.status(500).send(error)
   }
 })
@@ -340,7 +294,6 @@ const sendEmailHouse = asyncHandler(async (req, res) => {
 
     price: calcValues.price,
   }
-  console.log('house here skObj', skObj)
 
   const invoiceData = {
     header: {
@@ -399,6 +352,34 @@ const sendEmailHouse = asyncHandler(async (req, res) => {
   }
   console.log('inv Data House', invoiceData)
   let file = `${calcValues.street}_${calcValues.houseNumber}_${calcValues.email}_00${addAttachNumber}.pdf`
+
+  niceInvoiceHouse(invoiceData, file)
+
+  try {
+    const userMailData = {
+      from: `Michal Dovala  ${process.env.MD_EMAIL_FROM}`,
+
+      to: `${calcValues.email}`,
+      //bcc: process.env.MD_BCC,
+      bcc: process.env.NODEJS_BCC,
+      replyTo: process.env.MD_ADMIN_EMAIL,
+
+      subject: `Moderný marklér`,
+      html: html,
+      attachments: [
+        {
+          filename: file,
+          path: __dirname + `/${file}`,
+          cid: `uniq-${file}`,
+        },
+      ],
+    }
+    transporter().sendMail(userMailData)
+    res.json({ status: 'Success' })
+  } catch (error) {
+    console.log(error)
+    res.status(500).send(error)
+  }
 })
 
 export {

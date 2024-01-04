@@ -3,64 +3,63 @@ import PDFDocument from 'pdfkit'
 import path from 'path'
 const __dirname = path.resolve()
 
-const invoiceDataHouse = {
-  header: {
-    company_logo:
-      '/Users/peto/Desktop/projects/pic-api-server/utils/titulok01.png',
-  },
-  body: {
-    city: '/Users/peto/Desktop/projects/pic-api-server/utils/titulok02.png',
-  },
-  final: {
-    picture:
-      '/Users/peto/Desktop/projects/pic-api-server/utils/mdfinalpage.jpeg',
-  },
-  qrcode: '/Users/peto/Desktop/projects/pic-api-server/utils/md-qr-code.png',
-  email: 'pkvarg@yahoo.se',
-  flatOrHouse: 'dom',
-  city: 'Bratislava',
-  street: '1. ulica',
-  houseNumber: '23',
-  countRooms: '4',
-  countBathrooms: '4',
-  houseCondition: 'Pôvodný',
-  squareMeters: '124 m2',
-  houseType: '4',
-  hasPool: 'Áno',
-  hasSauna: 'Áno',
-  hasGardenShed: 'Áno',
-  hasGarage: 'Áno',
-  hasBasement: 'Áno',
-  hasTerrace: 'Áno',
-  landType: 'Strmý svah',
-  landSquareMeters: '600 m2',
-  builtYear: '1990',
-  hasThermostat: 'Áno',
-  hasAlarm: 'Áno',
-  hasFireAlarm: 'Áno',
-  hasSolarCollectors: 'Áno',
-  hasCameraSystem: 'Áno',
-  hasInternet: 'Áno',
-  hasWell: 'Áno',
-  hasCityWater: 'Áno',
-  hasCitySewerage: 'Áno',
-  hasSeptic: 'Áno',
-  hasElectricity: 'Áno',
-  hasGas: 'Áno',
-  urbanQuality: 'výborná',
-  hasElectricRadiators: 'Áno',
-  hasHeatPump: 'Áno',
-  hasOther: 'Áno',
-  hasSolidFuel: 'Áno',
-  hasGasBoiler: 'Áno',
-  hasUnderfloorHeating: 'Áno',
-  price: '699,847 €',
-}
+// const invoiceDataHouse = {
+//   header: {
+//     company_logo:
+//       '/Users/peto/Desktop/projects/pic-api-server/utils/titulok01.png',
+//   },
+//   body: {
+//     city: '/Users/peto/Desktop/projects/pic-api-server/utils/titulok02.png',
+//   },
+//   final: {
+//     picture:
+//       '/Users/peto/Desktop/projects/pic-api-server/utils/mdfinalpage.jpeg',
+//   },
+//   qrcode: '/Users/peto/Desktop/projects/pic-api-server/utils/md-qr-code.png',
+//   email: 'pkvarg@yahoo.se',
+//   flatOrHouse: 'dom',
+//   city: 'Bratislava',
+//   street: '1. ulica',
+//   houseNumber: '23',
+//   countRooms: '4',
+//   countBathrooms: '4',
+//   houseCondition: 'Pôvodný',
+//   squareMeters: '124 m2',
+//   houseType: '4',
+//   hasPool: 'Áno',
+//   hasSauna: 'Áno',
+//   hasGardenShed: 'Áno',
+//   hasGarage: 'Áno',
+//   hasBasement: 'Áno',
+//   hasTerrace: 'Áno',
+//   landType: 'Strmý svah',
+//   landSquareMeters: '600 m2',
+//   builtYear: '1990',
+//   hasThermostat: 'Áno',
+//   hasAlarm: 'Áno',
+//   hasFireAlarm: 'Áno',
+//   hasSolarCollectors: 'Áno',
+//   hasCameraSystem: 'Áno',
+//   hasInternet: 'Áno',
+//   hasWell: 'Áno',
+//   hasCityWater: 'Áno',
+//   hasCitySewerage: 'Áno',
+//   hasSeptic: 'Áno',
+//   hasElectricity: 'Áno',
+//   hasGas: 'Áno',
+//   urbanQuality: 'výborná',
+//   hasElectricRadiators: 'Áno',
+//   hasHeatPump: 'Áno',
+//   hasOther: 'Áno',
+//   hasSolidFuel: 'Áno',
+//   hasGasBoiler: 'Áno',
+//   hasUnderfloorHeating: 'Áno',
+//   price: '699,847 €',
+// }
 
 // path = f.ex. orderNumber.pdf to be counted in db and ++
 
 const niceInvoiceHouse = (invoice, path) => {
-  console.log('niceinvoice:', invoice)
   let doc = new PDFDocument({ size: 'A4', margin: 40 })
 
   doc.registerFont('trebuchet', __dirname + '/utils/fonts/trebuc.ttf')
@@ -493,6 +492,6 @@ let footerFinal = (doc, invoice) => {
     .moveDown()
 }
 
-niceInvoiceHouse(invoiceDataHouse, 'newHouseAttachment01.pdf')
+//niceInvoiceHouse(invoiceDataHouse, 'newHouseAttachment01.pdf')
 
 export default niceInvoiceHouse

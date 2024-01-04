@@ -48,7 +48,6 @@ const __dirname = path.resolve()
 // path = f.ex. orderNumber.pdf to be counted in db and ++
 
 const niceInvoice = (invoice, path) => {
-  console.log('niceinvoice:', invoice)
   let doc = new PDFDocument({ size: 'A4', margin: 40 })
 
   doc.registerFont('trebuchet', __dirname + '/utils/fonts/trebuc.ttf')
