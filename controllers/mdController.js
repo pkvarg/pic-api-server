@@ -244,15 +244,12 @@ const tipEmail = asyncHandler(async (req, res) => {
       html: `<div>
       <p>Dobrý deň,</p>
       <p>Ďakujeme Vám za Váš email.</p>
+      <p>Vaše meno: ${values.name}</p>
       <p>Váš email: ${values.email}</p>
-      <p>Meno majiteľa nehnuteľnosti: ${values.name}</p> 
+      <p>Meno majiteľa nehnuteľnosti: ${values.clientName}</p> 
       <p>Kontakt na majiteľa nehnuteľnosti: ${values.contact}</p> 
       <p>O akú nehnuteľnosť ide?: ${values.selectedType} </p>
-      
-      <p>Iné: ${values.other}</p>
       <p>Mesto/obec: ${values.city}</p>
-    
-    
       <p>Bližší popis: ${values.text}</p> 
       
       <p>Ozvem sa Vám čoskoro</p>
