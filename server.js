@@ -8,6 +8,7 @@ import visitorsRouter from './routes/visitorsRouter.js'
 import emailRouter from './routes/emailRouter.js'
 import cbaRouter from './routes/cbaRouter.js'
 import mdRouter from './routes/mdRouter.js'
+import jbRouter from './routes/jbRouter.js'
 import path from 'path'
 dotenv.config()
 //connectDB()
@@ -18,6 +19,7 @@ app.use(
   cors({
     origin: [
       'http://localhost:3000',
+      'https://jbcars.vercel.app',
       'http://localhost:5173',
       'https://localhost:5173',
       'https://cba.pictusweb.sk',
@@ -42,6 +44,7 @@ app.use('/api/visitors', visitorsRouter)
 app.use('/api/email', emailRouter)
 app.use('/api/cba', cbaRouter)
 app.use('/api/md', mdRouter)
+app.use('/api/jb', jbRouter)
 app.get('/', (req, res) => {
   res.send('Hello pic-api!')
 })
