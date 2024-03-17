@@ -1,0 +1,32 @@
+{
+  "name": "pic-api-server",
+  "version": "1.0.0",
+  "description": "api server",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "strapi": "npm run start --prefix strapi-app",
+    "start": "node server",
+    "ifstrapistart": "concurrently \"npm run nodestart\" \"npm run strapi\"",
+    "server": "nodemon server"
+  },
+  "author": "Peter Varga",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "concurrently": "^8.0.1",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.6.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.6",
+    "nodemon": "^3.0.1",
+    "pdfkit": "^0.14.0",
+    "twilio": "^5.0.0-rc.1"
+  }
+}
