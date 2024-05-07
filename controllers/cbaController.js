@@ -112,7 +112,7 @@ const getAllUsers = asyncHandler(async (req, res) => {
 // POST api/cba/blog
 
 const createBlog = asyncHandler(async (req, res) => {
-  const { title, category, media, text, upcoming, english } = req.body
+  const { title, category, media, text, upcoming, english, link } = req.body
 
   const newCbaBlog = new cbaBlog({
     title,
@@ -121,6 +121,7 @@ const createBlog = asyncHandler(async (req, res) => {
     text,
     upcoming,
     english,
+    link,
   })
 
   const createdNewCbaBlog = await newCbaBlog.save()
@@ -149,7 +150,8 @@ const getSingleBlog = asyncHandler(async (req, res) => {
 // PUT api/cba/blogs/update/:id
 
 const updateSingleBlog = asyncHandler(async (req, res) => {
-  const { title, category, media, text, upcoming } = req.body
+  const { title, category, media, text, upcoming, english, link } = req.body
+  console.log('update', english, link, title)
   const blog = await cbaBlog.findById(req.params.id)
   if (blog) {
     blog.title = title
@@ -159,6 +161,8 @@ const updateSingleBlog = asyncHandler(async (req, res) => {
     if (upcoming) {
       blog.upcoming = upcoming
     }
+    blog.english = english
+    blog.link = link
 
     const savedBlog = await blog.save()
 

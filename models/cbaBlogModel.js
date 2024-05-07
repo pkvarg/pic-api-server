@@ -20,6 +20,9 @@ const cbaBlogSchema = mongoose.Schema(
     english: {
       type: Boolean,
     },
+    link: {
+      type: String,
+    },
   },
 
   {
