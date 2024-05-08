@@ -31,6 +31,9 @@ const visitorsSchema = mongoose.Schema(
     visitorsMd: {
       type: Number,
     },
+    visitorsCba: {
+      type: Number,
+    },
   },
 
   {

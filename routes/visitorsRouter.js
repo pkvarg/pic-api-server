@@ -38,4 +38,8 @@ router.get('/io/counter', getVisitors)
 
 router.put('/io/agree/increase', increaseVisitors)
 
+router.put('/cba/increase', increaseVisitors)
+
+router.get('/cba/counter', getVisitors)
+
 export default router

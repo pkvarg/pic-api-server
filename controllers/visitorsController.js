@@ -37,6 +37,10 @@ const increaseVisitors = asyncHandler(async (req, res) => {
     console.log('here inc', url)
     const visitorsMdInDb = count.visitorsMd
     count.visitorsMd = visitorsMdInDb + 1
+  } else if (url === '/cba/increase') {
+    console.log('cba inc')
+    const visitorsCbaInDb = count.visitorsCba
+    count.visitorsCba = visitorsCbaInDb + 1
   } else {
     console.log('unknown url')
   }
@@ -83,6 +87,9 @@ const getVisitors = asyncHandler(async (req, res) => {
   } else if (url === '/md/counter') {
     const visitorsCount = count.visitorsMd
     console.log('vc here', visitorsCount)
+    res.json(visitorsCount)
+  } else if (url === '/cba/counter') {
+    const visitorsCount = count.visitorsCba
     res.json(visitorsCount)
   } else {
     console.log('Unknown url')
