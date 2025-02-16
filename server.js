@@ -33,7 +33,7 @@ app.use(
       'https://md.pictusweb.sk',
       'https://michaldovala.sk',
     ],
-  })
+  }),
 )
 
 app.use(express.json())
@@ -49,14 +49,12 @@ app.get('/', (req, res) => {
   res.send('Hello pic-api!')
 })
 
-const PORT = 2000
+const PORT = process.env.PORT
 
 const startServer = async () => {
   connectDB()
   try {
-    app.listen(PORT, () =>
-      console.log(`pic-server running on port ${PORT}`.yellow.bold)
-    )
+    app.listen(PORT, () => console.log(`pic-server running on port ${PORT}`.yellow.bold))
   } catch (error) {
     console.log(error)
   }
