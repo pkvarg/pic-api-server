@@ -26,6 +26,7 @@ app.use(
       'https://pictusweb.sk',
       'https://cestazivota.sk',
       'https://ioana-illustrations.eu',
+      'https://ioana2.ioana-illustrations.eu',
       'https://ecommerce.pictusweb.sk',
       'https://katolickaviera.sk',
       'https://svedkovia.sk',
